@@ -336,3 +336,7 @@ Temporary Items
 .apdisk
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle,maven,android,windows,linux,git,macos
+
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/5.2.1/executionHistory/executionHistory.lock
+.gradle/5.2.1/fileHashes/fileHashes.lock
