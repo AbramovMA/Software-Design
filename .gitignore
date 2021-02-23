@@ -335,8 +335,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle,maven,android,windows,linux,git,macos
-
+# Custom ignore rules
 .gradle/buildOutputCleanup/buildOutputCleanup.lock
 .gradle/5.2.1/executionHistory/executionHistory.lock
 .gradle/5.2.1/fileHashes/fileHashes.lock
+
+# End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle,maven,android,windows,linux,git,macos
