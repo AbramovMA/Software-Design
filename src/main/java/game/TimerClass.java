@@ -1,4 +1,5 @@
 package game;
 
-public class TimerClass {
+public class TimerClass{
+    int seconds = 60;
 }
