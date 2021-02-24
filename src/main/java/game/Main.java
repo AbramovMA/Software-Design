@@ -40,5 +40,4 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             System.exit(0);
         }
     }
-     //test
 }
