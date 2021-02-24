@@ -14,7 +14,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public static void main (String[] args){
         launch(args);
     }
-
+    //boolean for success and fail for Timer needed
     Button quitButton;
 
     @Override
