@@ -1,6 +1,7 @@
 package game;
 
 import game.TimerClass;
+import game.Puzzles;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Text input;
     Button[][] matrix;
 
+    Puzzles puzzle = new Puzzles();
     TimerClass timerClass = new TimerClass();
     String[] values = new String[] {
             "E9", "55", "55", "7A", "BD", "1C"
@@ -40,9 +42,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         GridPane base = new GridPane();
         quit = new Button("Quit");
 
+        puzzle.puzzleGenerator();
+        String stringedSeq = String.join(" ", puzzle.pickedSequence);
         timeString = new Text(Integer.toString(timerClass.getTime()));
 
-        sequence = new Text("Desired sequence: BD,E9,55,7A");
+        sequence = new Text("Desired sequence: " + stringedSeq);
 
         input = new Text("");
 
