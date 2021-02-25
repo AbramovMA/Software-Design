@@ -1,17 +1,6 @@
 package game;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-
-
-public class TimerClass{
+public class TimerClass {
     int seconds = 60;
     int signal;
     int time;
@@ -26,7 +15,6 @@ public class TimerClass{
     public int getTime(){
         time = gameLaunched();
         return seconds;
-        //return time;
     } // this needs some changes probably
 
     /*
@@ -67,7 +55,6 @@ public class TimerClass{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                //System.out.println(" " + seconds);
                 gameTimer();
             }
         }

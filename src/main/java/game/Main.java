@@ -1,8 +1,6 @@
 package game;
 
 import game.TimerClass;
-import game.Controller;
-import game.GridLogic;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -12,31 +10,41 @@ import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 import java.util.Random;
-//import java.util.Timer;
+
+
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int NODES = 6;
-    Button quit;
+    Text timeString;
+    Text sequence;
+    Text input;
     Button[][] matrix;
-    TimerClass timer = new TimerClass();
-    Text timeText;
+
+    TimerClass timerClass = new TimerClass();
     String[] values = new String[] {
             "E9", "55", "55", "7A", "BD", "1C"
     };
+    Button quit;
 
+    private Parent createContent(){
+        return null;
+    }
 
     @Override
     public void start(Stage primaryStage) {
         GridPane base = new GridPane();
         quit = new Button("Quit");
+
+        timeString = new Text(Integer.toString(timerClass.getTime()));
+
+        sequence = new Text("Desired sequence: BD,E9,55,7A");
+
+        input = new Text("");
 
         quit.setOnAction(this);
 
@@ -61,14 +69,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         Parent base = FXMLLoader.load(getClass().getResource("main.fxml"));
 */
-        //timer.getTime();
-
         SubScene matrixScene = new SubScene(base, 250, 250);
         SubScene othersScene = new SubScene(quit, 50, 25);
+
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        //timeText = new Text(Integer.toString(timer.getTime()));  HERE IS THE TIMER
-        root.getChildren().addAll(timeText, matrixScene, othersScene);
+        root.getChildren().addAll(timeString,sequence,input,matrixScene, othersScene);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -93,6 +99,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 //        }
         if (actionEvent.getSource() == quit){
             System.exit(0);
+        }
+
+        for(int y = 0; y < NODES; y++) {
+            for (int x = 0; x < NODES; x++) {
+                if (actionEvent.getSource() == matrix[x][y]) {
+                    input.setText(matrix[x][y].getText());
+                }
+            }
         }
     }
 }
