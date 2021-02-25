@@ -1,5 +1,21 @@
 
-M
-java:S1128"0Remove this unused import 'javafx.scene.Parent'.(²ä¡È8Ãá“üü.
-R
-java:S1128"0Remove this unused import 'javafx.geometry.Pos'.(ÌÆ÷Ùøÿÿÿÿ8Ãá“üü.
+X	java:S125@"<This block of commented-out lines of code should be removed.(£ËÓ€8Óâ–Ìı.
+]	java:S125W"<This block of commented-out lines of code should be removed.(ÉÑª¼ûÿÿÿÿ8Çì˜©ı.
+X	java:S1259"<This block of commented-out lines of code should be removed.(†¥¯¿8Çì˜©ı.
+@
+java:S21190"Save and re-use this "Random".(šŸ«íøÿÿÿÿ8Çì˜©ı.
+X
+java:S1128";Remove this unused import 'javafx.scene.control.TextField'.(¨¢¤¶8ëéñËı.
+q
+java:S1128"TRemove this unnecessary import: same package classes are always implicitly imported.(—óÚØ8Æì˜©ı.
+p
+java:S1128"TRemove this unnecessary import: same package classes are always implicitly imported.(¨šŒ8Çì˜©ı.
+X	java:S125"<This block of commented-out lines of code should be removed.(üæà8¢‚ÒËı.
+]	java:S125L"<This block of commented-out lines of code should be removed.(«™üìûÿÿÿÿ8Çì˜©ı.
+W
+java:S1128":Remove this unused import 'javafx.scene.layout.StackPane'.(™÷èò8Çì˜©ı.
+q
+java:S1128"TRemove this unnecessary import: same package classes are always implicitly imported.(£Ö†ş8Çì˜©ı.
+X	java:S125F"<This block of commented-out lines of code should be removed.(ïñ‡8Åš¬Ìı.
+]	java:S125>"<This block of commented-out lines of code should be removed.(ŒÏ‚¹øÿÿÿÿ8Çì˜©ı.
+]	java:S125"<This block of commented-out lines of code should be removed.(‰ÍÛïúÿÿÿÿ8àéçÍı.

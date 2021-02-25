@@ -12,19 +12,22 @@ import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
 import java.util.Random;
-import java.util.Timer;
+//import java.util.Timer;
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int NODES = 6;
     Button quit;
     Button[][] matrix;
     TimerClass timer = new TimerClass();
+    Text timeText;
     String[] values = new String[] {
             "E9", "55", "55", "7A", "BD", "1C"
     };
@@ -58,11 +61,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         Parent base = FXMLLoader.load(getClass().getResource("main.fxml"));
 */
+        //timer.getTime();
+
         SubScene matrixScene = new SubScene(base, 250, 250);
         SubScene othersScene = new SubScene(quit, 50, 25);
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(matrixScene, othersScene);
+        //timeText = new Text(Integer.toString(timer.getTime()));  HERE IS THE TIMER
+        root.getChildren().addAll(timeText, matrixScene, othersScene);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);

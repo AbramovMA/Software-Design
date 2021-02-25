@@ -23,8 +23,9 @@ public class TimerClass{
 
 
     //  NEED TO ADD IT TO THE SCENE, WHERE IT WOULD CHANGE the number each time
-    public void getTime(){
+    public int getTime(){
         time = gameLaunched();
+        return seconds;
         //return time;
     } // this needs some changes probably
 
@@ -66,6 +67,7 @@ public class TimerClass{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                //System.out.println(" " + seconds);
                 gameTimer();
             }
         }
