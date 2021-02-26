@@ -14,14 +14,11 @@ public class Puzzles {
 
 
     public void puzzleGenerator(){
-        System.out.println("Pass 00");
-
-
-        System.out.println("Pass 0.5");
+        //System.out.println("Pass 00");
 
         randomNum = randomPuzzle.nextInt(3) + 1;
 
-        System.out.println("Pass 1");
+        //System.out.println("Pass 1");
         puzzleGenerate(randomNum);
     }
 
@@ -31,10 +28,10 @@ public class Puzzles {
             buffSize = 6;
             sequenceSize = 4;
 
-            System.out.println("Pass 2");
+            //System.out.println("Pass 2");
 
             pickedSequence = new String[] {"BD", "E9", "BD", "1C"};
-            System.out.println("Pass 3");
+            //System.out.println("Pass 3");
 
             pickedMatrix = new String[][] {{"E9","7A","1C","1C","55","E9"},
                     {"55","55","7A","7A","E9","BD"},
@@ -42,7 +39,7 @@ public class Puzzles {
                     {"BD","7A","1C","55","7A","55"},
                     {"BD","1C","7A","55","E9","7A"},
                     {"1C","E9","55","55","7A","E9"}};
-            System.out.println("Pass4");
+            //System.out.println("Pass4");
         }
         else if (i == 2){
             System.out.println("i = 2");

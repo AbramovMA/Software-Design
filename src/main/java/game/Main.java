@@ -26,7 +26,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Text input;
     Button[][] matrix;
 
-    Puzzles puzzle = new Puzzles();
+    Puzzles ourPuzzle = new Puzzles();
     TimerClass timerClass = new TimerClass();
     String[] values = new String[] {
             "E9", "55", "55", "7A", "BD", "1C"
@@ -42,8 +42,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         GridPane base = new GridPane();
         quit = new Button("Quit");
 
-        puzzle.puzzleGenerator();
-        String stringedSeq = String.join(" ", puzzle.pickedSequence);
+        ourPuzzle.puzzleGenerator();
+        String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
         timeString = new Text(Integer.toString(timerClass.getTime()));
 
         sequence = new Text("Desired sequence: " + stringedSeq);
@@ -53,17 +53,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         quit.setOnAction(this);
 
         matrix = new Button[NODES][NODES];
-        for(int y = 0; y < NODES; y++)
+        for(int x = 0; x < NODES; x++)
         {
-            for(int x = 0; x < NODES; x++)
+            for(int y = 0; y < NODES; y++)
             {
-                Random rand = new Random();
-                int rand1 = rand.nextInt(values.length);
-
                 matrix[x][y] = new Button();
-                matrix[x][y].setText(values[rand1]);
+                matrix[x][y].setText(ourPuzzle.pickedMatrix[x][y]);
 
-                base.add(matrix[x][y], y, x);
+                base.add(matrix[x][y], x, y);
 
                 matrix[x][y].setOnAction(this);
                 //matrix[x][y].setDisable(true);
