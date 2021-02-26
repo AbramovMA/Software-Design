@@ -24,6 +24,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Text timeString;
     Text sequence;
     Text input;
+    Text buffInfo;
     Button[][] matrix;
 
     Puzzles ourPuzzle = new Puzzles();
@@ -47,10 +48,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         timeString = new Text(Integer.toString(timerClass.getTime()));
 
         sequence = new Text("Desired sequence: " + stringedSeq);
-
+        buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
-
-        quit.setOnAction(this);
 
         matrix = new Button[NODES][NODES];
         for(int x = 0; x < NODES; x++)
@@ -75,7 +74,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(timeString,sequence,input,matrixScene, othersScene);
+        root.getChildren().addAll(timeString,sequence,buffInfo,input,matrixScene, othersScene);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
