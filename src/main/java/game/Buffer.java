@@ -1,6 +1,5 @@
 package game;
 
-import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 import java.util.Arrays;
@@ -19,9 +18,10 @@ final public class Buffer {
         max_size = capacity;
         size = 0;
         values = new String[max_size];
+        Arrays.fill(values, "");
 
-        contents = new Text();
-        contents.setX(100);
+        contents = new Text("Probably buffer");
+        contents.setX(0);
         contents.setY(0);
     }
 
@@ -82,7 +82,8 @@ final public class Buffer {
      **/
     // TODO: implement me
     final public void update(){
-        contents.setText("Buffer: " + String.join(" ", values));
+        String text = "Buffer: " + String.join(" ", values);
+        contents.setText(text);
         //contents.setText("kjhgf\nkjhgf\nkjhgf");
     }
 }

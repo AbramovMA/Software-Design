@@ -95,7 +95,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,ourPuzzle.buffer.contents,quit);
+        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit,ourPuzzle.buffer.contents);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -110,6 +110,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
+        ourPuzzle.buffer.update();
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
         for (int c = 0; c < NODES; c++) { //for resetting the matrix style after each click
@@ -151,8 +152,5 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                             new KeyValue(timeSeconds, 0)));
             timeline.playFromStart();
         }
-
-        ourPuzzle.buffer.update();
-
     }
 }
