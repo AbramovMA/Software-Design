@@ -62,8 +62,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         timerLabel = new Label(Integer.toString(STARTTIME));
         timerLabel.setTextFill(Color.BLUE);
         timerLabel.setFont(Font.font(30));
-
         timerLabel.textProperty().bind(timeSeconds.asString());
+
         start = new Button("Start");
         start.setOnAction(this);
 
@@ -124,14 +124,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             for (int row = 0; row < NODES; row++) {
                 matrix[row][column].setStyle(null);
                 if (actionEvent.getSource() == matrix[row][column] && !orientation) { //vertically color white with !orientation
-                    for (int c = 0; c < NODES; c++) {
+                    for (column = 0; column < NODES; column++) {
                         matrix[row][column].setStyle("-fx-background-color: #ffffff");
                         orientation = true;
                     }
                     return;
                 }
                 else if (actionEvent.getSource() == matrix[row][column] && orientation) { //horizontally color white after orientation set to true
-                    for (int r = 0; r < NODES; r++) {
+                    for (row = 0; row < NODES; row++) {
                         matrix[row][column].setStyle("-fx-background-color: #ffffff");
                         orientation = false;
                     }
