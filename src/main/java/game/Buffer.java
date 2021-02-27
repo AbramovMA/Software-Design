@@ -81,9 +81,8 @@ final public class Buffer {
      * Draws the buffer on the screen
      **/
     // TODO: implement me
-    final public Text update(){
+    final public void update(){
         contents.setText("Buffer: " + String.join(" ", values));
         //contents.setText("kjhgf\nkjhgf\nkjhgf");
-        return contents;
     }
 }
