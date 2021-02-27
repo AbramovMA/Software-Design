@@ -3,6 +3,9 @@ package game;
 import game.TimerClass;
 import game.Puzzles;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,12 +19,23 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
-import java.util.Random;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.animation.KeyValue;
+import javafx.util.Duration;
 
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int NODES = 6;
-    Text timeString;
+
+    private static final Integer STARTTIME = 15;
+    private Timeline timeline;
+    private Label timerLabel = new Label();
+    private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
+
     Text sequence;
     Text input;
     Text buffInfo;
@@ -32,6 +46,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     String[] values = new String[] {
             "E9", "55", "55", "7A", "BD", "1C"
     };
+
+    Button start;
     Button quit;
 
     private Parent createContent(){
@@ -41,13 +57,24 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     @Override
     public void start(Stage primaryStage) {
         GridPane base = new GridPane();
+
+        timerLabel = new Label(Integer.toString(STARTTIME));
+        timerLabel.setTextFill(Color.BLUE);
+        timerLabel.setFont(Font.font(30));
+
+        timerLabel.textProperty().bind(timeSeconds.asString());
+        start = new Button("Start");
+        start.setOnAction(this);
+
         quit = new Button("Quit");
+        quit.setOnAction(this);
+
+        sequence = new Text("Press start to show sequence");
 
         ourPuzzle.puzzleGenerator();
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
-        timeString = new Text(Integer.toString(timerClass.getTime()));
 
-        sequence = new Text("Desired sequence: " + stringedSeq);
+
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
 
@@ -75,7 +102,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(timeString,sequence,buffInfo,input,matrixScene, othersScene);
+        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -109,5 +136,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 }
             }
         }
+
+        if (actionEvent.getSource() == start){
+            sequence.setText("Desired sequence: BD,E9,55,7A");
+            if (timeline != null) {
+                timeline.stop();
+            }
+            timeSeconds.set(STARTTIME);
+            timeline = new Timeline();
+            timeline.getKeyFrames().add(
+                    new KeyFrame(Duration.seconds(STARTTIME+1),
+                            new KeyValue(timeSeconds, 0)));
+            timeline.playFromStart();
+        }
+
     }
 }
