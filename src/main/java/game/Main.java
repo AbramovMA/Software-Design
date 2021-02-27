@@ -43,10 +43,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button[][] matrix;
 
     Puzzles ourPuzzle = new Puzzles();
-    TimerClass timerClass = new TimerClass();
-    String[] values = new String[] {
-            "E9", "55", "55", "7A", "BD", "1C"
-    };
 
     Button start;
     Button quit;
@@ -73,7 +69,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         sequence = new Text("Press start to show sequence");
 
         ourPuzzle.puzzleGenerator();
-        String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
 
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
@@ -115,6 +110,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
+        String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
+
         for (int c = 0; c < NODES; c++) { //for resetting the matrix style after each click
             for (int r = 0; r < NODES; r++) {
                 matrix[r][c].setStyle(null);
@@ -143,7 +140,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             System.exit(0);
         }
         if (actionEvent.getSource() == start){
-            sequence.setText("Desired sequence: BD,E9,55,7A");
+            sequence.setText(stringedSeq);
             if (timeline != null) {
                 timeline.stop();
             }
