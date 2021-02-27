@@ -26,6 +26,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Text input;
     Text buffInfo;
     Button[][] matrix;
+    Buffer buffer;
 
     Puzzles ourPuzzle = new Puzzles();
     TimerClass timerClass = new TimerClass();
