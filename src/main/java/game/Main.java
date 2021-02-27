@@ -102,7 +102,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit);
+        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,ourPuzzle.buffer.contents,quit);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -149,6 +149,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                             new KeyValue(timeSeconds, 0)));
             timeline.playFromStart();
         }
+
+        ourPuzzle.buffer.update();
 
     }
 }
