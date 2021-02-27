@@ -23,6 +23,8 @@ final public class Buffer {
         contents = new Text("Probably buffer");
         contents.setX(0);
         contents.setY(0);
+
+        update();
     }
 
     /**
@@ -34,6 +36,7 @@ final public class Buffer {
         if (size < max_size) {
             values[size] = new_value;
             size++;
+            update();
             return true;
         }else
             return false;
@@ -78,12 +81,10 @@ final public class Buffer {
     }
 
     /**
-     * Draws the buffer on the screen
+     * Updates the buffer on screen
      **/
-    // TODO: implement me
-    final public void update(){
+    private void update(){
         String text = "Buffer: " + String.join(" ", values);
         contents.setText(text);
-        //contents.setText("kjhgf\nkjhgf\nkjhgf");
     }
 }

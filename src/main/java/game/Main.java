@@ -110,7 +110,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        ourPuzzle.buffer.update();
+        //ourPuzzle.buffer.update();
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
         for (int c = 0; c < NODES; c++) { //for resetting the matrix style after each click
