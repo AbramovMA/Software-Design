@@ -30,6 +30,7 @@ import javafx.util.Duration;
 
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int NODES = 6;
+    private static boolean orientation = true;
 
     private static final Integer STARTTIME = 15;
     private Timeline timeline;
@@ -93,10 +94,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 //matrix[x][y].setDisable(true);
             }
         }
-/*
 
-        Parent base = FXMLLoader.load(getClass().getResource("main.fxml"));
-*/
         SubScene matrixScene = new SubScene(base, 250, 250);
         SubScene othersScene = new SubScene(quit, 50, 25);
 
@@ -107,7 +105,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         primaryStage.setResizable(false);
         primaryStage.setTitle("Cyberpunk Breach");
-        //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -118,25 +115,33 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-//        for(int y = 0; y < NODES; y++) {
-//            for (int x = 0; x < NODES; x++) {
-//                if (actionEvent.getSource() == matrix[x][y]) {
-//                    System.out.println(matrix[x][y].getText());
-//                }
-//            }
-//        }
-        if (actionEvent.getSource() == quit){
-            System.exit(0);
+        for (int c = 0; c < NODES; c++) { //for resetting the matrix style after each click
+            for (int r = 0; r < NODES; r++) {
+                matrix[r][c].setStyle(null);
+            }
         }
-
-        for(int y = 0; y < NODES; y++) {
-            for (int x = 0; x < NODES; x++) {
-                if (actionEvent.getSource() == matrix[x][y]) {
-                    input.setText(matrix[x][y].getText());
+        for (int column = 0; column < NODES; column++) { //scans each row/column
+            for (int row = 0; row < NODES; row++) {
+                matrix[row][column].setStyle(null);
+                if (actionEvent.getSource() == matrix[row][column] && !orientation) { //vertically color white with !orientation
+                    for (int c = 0; c < NODES; c++) {
+                        matrix[row][column].setStyle("-fx-background-color: #ffffff");
+                        orientation = true;
+                    }
+                    return;
+                }
+                else if (actionEvent.getSource() == matrix[row][column] && orientation) { //horizontally color white after orientation set to true
+                    for (int r = 0; r < NODES; r++) {
+                        matrix[row][column].setStyle("-fx-background-color: #ffffff");
+                        orientation = false;
+                    }
+                    return;
                 }
             }
         }
-
+        if (actionEvent.getSource() == quit){
+            System.exit(0);
+        }
         if (actionEvent.getSource() == start){
             sequence.setText("Desired sequence: BD,E9,55,7A");
             if (timeline != null) {
