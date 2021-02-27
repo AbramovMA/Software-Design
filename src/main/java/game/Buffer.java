@@ -1,9 +1,16 @@
 package game;
 
+import javafx.scene.Group;
+import javafx.scene.text.Text;
+
+import java.util.Arrays;
+
 final public class Buffer {
     final private int max_size;    // maximum amount of value the buffer can store
     private int size;              // current amount of value the buffer can store
     final private String[] values; // the values stored in the buffer
+
+    Text contents = new Text();
 
     /**
      * Constructor for a buffer with a predefined size `capacity`
@@ -12,6 +19,10 @@ final public class Buffer {
         max_size = capacity;
         size = 0;
         values = new String[max_size];
+
+        contents = new Text();
+        contents.setX(100);
+        contents.setY(0);
     }
 
     /**
@@ -69,7 +80,10 @@ final public class Buffer {
     /**
      * Draws the buffer on the screen
      **/
-    final public void show(){
-        // TODO: implement me
+    // TODO: implement me
+    final public Text update(){
+        //contents.setText(String.join(" ", values));
+        contents.setText("kjhgf\nkjhgf\nkjhgf");
+        return contents;
     }
 }
