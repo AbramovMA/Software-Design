@@ -26,7 +26,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Text input;
     Text buffInfo;
     Button[][] matrix;
-    Buffer buffer;
 
     Puzzles ourPuzzle = new Puzzles();
     TimerClass timerClass = new TimerClass();
@@ -76,7 +75,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(timeString,sequence,buffInfo,input,matrixScene, othersScene);
+        root.getChildren().addAll(timeString,sequence,buffInfo,input,matrixScene, ourPuzzle.buffer.contents, othersScene);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -110,5 +109,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 }
             }
         }
+
+        ourPuzzle.buffer.update();
     }
 }

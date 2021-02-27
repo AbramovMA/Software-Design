@@ -1,7 +1,7 @@
 package game;
 
 public class TimerClass {
-    int seconds = 60;
+    int seconds = 2;
     int signal;
     int time;
     // 0-success; 1-ran out of time; 2-failed complete; 3-quitted;

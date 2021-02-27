@@ -21,7 +21,7 @@ final public class Buffer {
         values = new String[max_size];
 
         contents = new Text();
-        contents.setX(0);
+        contents.setX(100);
         contents.setY(0);
     }
 
@@ -81,8 +81,9 @@ final public class Buffer {
      * Draws the buffer on the screen
      **/
     // TODO: implement me
-    final public Text get_textbox(){
-        contents.setText(String.join(" ", values));
+    final public Text update(){
+        //contents.setText(String.join(" ", values));
+        contents.setText("kjhgf\nkjhgf\nkjhgf");
         return contents;
     }
 }
