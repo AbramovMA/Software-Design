@@ -28,7 +28,7 @@ public class Puzzles {
             System.out.println("i = 1");
             buffSize = 5;
             sequenceSize = 4;
-            puzzleSize = 6;
+            //puzzleSize = 6;
 
             //System.out.println("Pass 2");
 
@@ -49,7 +49,7 @@ public class Puzzles {
             System.out.println("i = 2");
             buffSize = 6;
             sequenceSize = 5;
-            puzzleSize = 6;
+            //puzzleSize = 6;
 
 
             String[] newSequence = {"E9", "7A", "1C", "55", "55"};
@@ -67,7 +67,7 @@ public class Puzzles {
             System.out.println("i = 3");
             buffSize = 8;
             sequenceSize = 6;
-            puzzleSize = 6;
+            //puzzleSize = 6;
 
 
             String[] newSequence = {"7A", "55", "1C", "E9", "BD", "7A"};
@@ -85,7 +85,7 @@ public class Puzzles {
             System.out.println("i = 4");
             buffSize = 10;
             sequenceSize = 8;
-            puzzleSize = 6;
+            //puzzleSize = 6;
 
 
             String[] newSequence = {"BD", "55", "BD", "E9", "7A", "1C", "1C", "E9"};
@@ -103,7 +103,7 @@ public class Puzzles {
             System.out.println("i = 5");
             buffSize = 10;
             sequenceSize = 7;
-            puzzleSize = 6;
+           // puzzleSize = 6;
 
 
             String[] newSequence = {"1C", "BD", "55", "E9", "7A", "55", "1C"};
