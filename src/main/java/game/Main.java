@@ -20,7 +20,7 @@ import java.util.Random;
 
 
 public class Main extends Application implements EventHandler<ActionEvent> {
-    private static final int NODES = 6;
+    private int NODES = 6;
     Text timeString;
     Text sequence;
     Text input;
@@ -51,6 +51,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
 
+        NODES = ourPuzzle.puzzleSize;
         matrix = new Button[NODES][NODES];
         for(int x = 0; x < NODES; x++)
         {
