@@ -10,7 +10,7 @@ final public class Buffer {
     private int size;              // current amount of value the buffer can store
     final private String[] values; // the values stored in the buffer
 
-    Text contents = new Text();
+    Text contents;
 
     /**
      * Constructor for a buffer with a predefined size `capacity`
@@ -82,8 +82,8 @@ final public class Buffer {
      **/
     // TODO: implement me
     final public Text update(){
-        //contents.setText(String.join(" ", values));
-        contents.setText("kjhgf\nkjhgf\nkjhgf");
+        contents.setText("Buffer: " + String.join(" ", values));
+        //contents.setText("kjhgf\nkjhgf\nkjhgf");
         return contents;
     }
 }
