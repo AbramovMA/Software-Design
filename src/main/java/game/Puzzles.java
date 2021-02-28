@@ -2,9 +2,6 @@ package game;
 import java.util.Random;
 
 public class Puzzles {
-    //we need to make a array of matrices
-    //random generator
-    //sections
     String[] pickedSequence = {};
     String[][] pickedMatrix = {};
     int buffSize = 0;

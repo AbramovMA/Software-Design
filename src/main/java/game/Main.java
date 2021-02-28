@@ -132,49 +132,58 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             ourPuzzle.buffer.add_value(value);
             passSeq = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
                     ourPuzzle.buffer, passSeq);
-            System.out.println(passSeq + " this is pass!");
         }
 
         if(passSeq == 2){  //Winner Winner, Chicken Dinner
+            System.out.println(passSeq + ": Winner");
+
             Stage endingStage = new Stage();
             goodJob = new Text("You're a Winner!");
 
             goodJob.setStroke(Color.GREEN);
             goodJob.setStyle("-fx-font: 50 arial");
+
             VBox boi = new VBox();
             boi.setAlignment(Pos.CENTER);
             boi.getChildren().addAll(goodJob, quit);
+
             Scene scene = new Scene(boi, 720, 480);
             endingStage.setResizable(false);
             endingStage.setTitle("Success!");
 
             endingStage.setScene(scene);
             endingStage.show();
-
-
         }
 
         if(passSeq == 3 || fail == true){ // fail is there in case timer runs out and you can set it as fail = true
+            System.out.println(passSeq + ": Game Over");
+
             Stage endingStage = new Stage();
             badJob = new Text("Game Over!");
 
             badJob.setStroke(Color.RED);
             badJob.setStyle("-fx-font: 50 arial");
+
             VBox boi = new VBox();
             boi.setAlignment(Pos.CENTER);
             boi.getChildren().addAll(badJob, quit);
+
             Scene scene = new Scene(boi, 720, 480);
             endingStage.setResizable(false);
-            endingStage.setTitle("Success!");
+            endingStage.setTitle("Game Over!");
 
             endingStage.setScene(scene);
             endingStage.show();
 
         }
         if(passSeq == 1){ // this is to pass to the next sequence
+            System.out.println(passSeq + ": next one.");
             iSeq++;
+            //need to add some visuals, so player could see, on which part
+            //of the sequence player is right now
 
         }
+
         // here is nothing
 
 
