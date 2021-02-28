@@ -55,6 +55,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public void start(Stage primaryStage) {
         GridPane base = new GridPane();
 
+        currSeq = new Sequence();
+
         time = new TimerClass();
 
         timerLabel = new Label(Integer.toString(time.getStartTime()));
@@ -125,6 +127,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             String value = selected_matrix_value.get();
             // use  value
             ourPuzzle.buffer.add_value(value);
+            currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value, success, fail,
+                    ourPuzzle.buffer, passSeq);
         }
 
         //ourPuzzle.buffer.add_value(button_grid[row][column].getText());

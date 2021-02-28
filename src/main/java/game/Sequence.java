@@ -6,6 +6,8 @@ public class Sequence {
     //need to make sure it progresses, when needed
     //visuals???
 
+
+
     /*
     what function needs to be made, so we could use this properly:
         First: value from Matrix has to be already input in buffer before calling this it,
@@ -49,20 +51,19 @@ public class Sequence {
         - input it into the main, so the whole thing would work together
 
      */
-    public boolean sequenceProgression(int i, String[] sequence, String input, boolean success, boolean fail,
+    public void sequenceProgression(int i, String[] sequence, String input, boolean success, boolean fail,
                                        Buffer buffer, boolean pass){
 
-        String[] currentSequence = sequence;
-
+        String[] currentSequence = new String[sequence.length];
+        currentSequence = sequence;
         if(i == (sequence.length - 1)){
             if(input == currentSequence[i]){
                 success = true;
-                return success;
             }
             else{
                 if(buffer.is_full()){
                     fail = true;
-                    return fail; // we trigger Game Over
+                    // we trigger Game Over
                     // this is when the game should end, cause he didn't pass the last
                     // value of the sequence
                 }
@@ -74,13 +75,15 @@ public class Sequence {
             if(input == currentSequence[i]){
                 i++;
                 pass = true;
+
             }
             else{
                 pass = false;
                 //nothing really. Player has to chose another one
             }
         }
-        return pass;
+        System.out.println("Pass Should've worked!!!");
+        //return pass;
     }
 
 
