@@ -8,10 +8,10 @@ public class Sequence {
 
     /*
     what function needs to be made, so we could use this properly:
-        First: value from Matrix has to be already input before calling this it,
+        First: value from Matrix has to be already input in buffer before calling this it,
         cause it makes more sense.
         Initial value of:
-            Globally:
+            (Globally in Main!!!!!: )
                 iSeq == 0;
                 success should be false
                 fail should be false
@@ -19,8 +19,9 @@ public class Sequence {
 
         This function has to be launched each time after interaction with the button:
             we have a string from the button; iSeq (in seq function is i) = which sequence is being compared
-            to in the list; current sequence; size of the sequence;
-            iSeq has to be stored globally in main, so it would work properly
+            to in the list; current sequence; size of the sequence; booleans: success, fail and pass(to move onto
+            next code of the sequence; buffer's size and max size;
+            These are included, when launching the function, so it would work, as intended
 
         After this function
          for some stuff, logic and visual:
@@ -36,12 +37,21 @@ public class Sequence {
             else{
                     nothing. Game is keep going
                 }
-
-
      */
 
+
+
+
+
+    /*
+    TO DO:
+        - unprivatize sizes of buffer (plz)
+        - input it into the main, so the whole thing would work together
+
+     */
     public boolean sequenceProgression(int i, String[] sequence, String input, boolean success, boolean fail,
-    int currBuffSize, int maxBuffSize, boolean pass){
+                                       int currBuffSize, int maxBuffSize, boolean pass){
+
         String[] currentSequence = sequence;
 
         if(i == (sequence.length - 1)){
