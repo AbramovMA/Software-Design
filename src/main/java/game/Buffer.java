@@ -83,7 +83,7 @@ final public class Buffer {
     /**
      * Updates the buffer on screen
      **/
-    private void update(){
+    public void update(){
         String text = "Buffer: " + String.join(" ", values);
         contents.setText(text);
     }

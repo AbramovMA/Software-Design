@@ -107,7 +107,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        //ourPuzzle.buffer.update();
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
         for (int c = 0; c < NODES; c++) { //for resetting the matrix style after each click
@@ -117,6 +116,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         }
         for (int column = 0; column < NODES; column++) { //scans each row/column
             for (int row = 0; row < NODES; row++) {
+                if(actionEvent.getSource() == matrix[row][column]) {
+                    ourPuzzle.buffer.add_value(matrix[row][column].getText());
+                    ourPuzzle.buffer.update();
+                }
                 matrix[row][column].setStyle(null);
                 if (actionEvent.getSource() == matrix[row][column] && !orientation) { //vertically color white with !orientation
                     for (column = 0; column < NODES; column++) {
