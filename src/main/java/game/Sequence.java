@@ -1,6 +1,7 @@
 package game;
 
 public class Sequence {
+
     //we need to compare it to the input from the buffer
     //need to make sure it progresses, when needed
     //visuals???
@@ -38,40 +39,40 @@ public class Sequence {
 
 
      */
-    /*
-    public void sequenceProgression(int i, String[] sequence, String input, boolean success, boolean fail,
-    int buffSize, boolean pass){
+
+    public boolean sequenceProgression(int i, String[] sequence, String input, boolean success, boolean fail,
+    int currBuffSize, int maxBuffSize, boolean pass){
         String[] currentSequence = sequence;
 
-        if(i == (size - 1)){
-            if(input == currentSequence(i){
-                success == true;
+        if(i == (sequence.length - 1)){
+            if(input == currentSequence[i]){
+                success = true;
                 return success;
             }
             else{
-                if(buffSize == it's max size){
-                    fail == true;
+                if(currBuffSize == maxBuffSize){
+                    fail = true;
                     return fail; // we trigger Game Over
                     // this is when the game should end, cause he didn't pass the last
                     // value of the sequence
                 }
-                pass == false
+                pass = false;
                 // if not, then nothing really
             }
         }
         else{
-            if(input == currentSequence(i)){
+            if(input == currentSequence[i]){
                 i++;
                 pass = true;
             }
             else{
-                pass == false;
+                pass = false;
                 //nothing really. Player has to chose another one
             }
         }
-        return passDeq;
+        return pass;
     }
 
-     */
+
 
 }
