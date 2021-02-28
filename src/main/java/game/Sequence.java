@@ -20,7 +20,7 @@ public class Sequence {
         This function has to be launched each time after interaction with the button:
             we have a string from the button; iSeq (in seq function is i) = which sequence is being compared
             to in the list; current sequence; size of the sequence; booleans: success, fail and pass(to move onto
-            next code of the sequence; buffer's size and max size;
+            next code of the sequence; buffer;
             These are included, when launching the function, so it would work, as intended
 
         After this function
@@ -50,7 +50,7 @@ public class Sequence {
 
      */
     public boolean sequenceProgression(int i, String[] sequence, String input, boolean success, boolean fail,
-                                       int currBuffSize, int maxBuffSize, boolean pass){
+                                       Buffer buffer, boolean pass){
 
         String[] currentSequence = sequence;
 
@@ -60,7 +60,7 @@ public class Sequence {
                 return success;
             }
             else{
-                if(currBuffSize == maxBuffSize){
+                if(buffer.is_full()){
                     fail = true;
                     return fail; // we trigger Game Over
                     // this is when the game should end, cause he didn't pass the last
