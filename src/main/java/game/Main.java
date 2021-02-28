@@ -34,8 +34,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Text sequence;
     Text input;
     Text buffInfo;
-    //Button[][] matrix;
+
     Matrix matrix;
+
+    Text goodJob;
+    Text badJob;
 
     Puzzles ourPuzzle;
 
@@ -45,7 +48,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     int iSeq = 0;
     boolean success = false;
     boolean fail = false;
-    boolean passSeq = false;
+    int passSeq = 0;
 
     private Parent createContent(){
         return null;
@@ -127,15 +130,53 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             String value = selected_matrix_value.get();
             // use  value
             ourPuzzle.buffer.add_value(value);
-            currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value, success, fail,
+            passSeq = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
                     ourPuzzle.buffer, passSeq);
+            System.out.println(passSeq + " this is pass!");
         }
 
-        //ourPuzzle.buffer.add_value(button_grid[row][column].getText());
-        //ourPuzzle.buffer.update();
+        if(passSeq == 2){  //Winner Winner, Chicken Dinner
+            Stage endingStage = new Stage();
+            goodJob = new Text("You're a Winner!");
 
-        //currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence,matrix[row][column].getText(),success, fail,
-        //   ourPuzzle.buffer, passSeq);
+            goodJob.setStroke(Color.GREEN);
+            goodJob.setStyle("-fx-font: 50 arial");
+            VBox boi = new VBox();
+            boi.setAlignment(Pos.CENTER);
+            boi.getChildren().addAll(goodJob, quit);
+            Scene scene = new Scene(boi, 720, 480);
+            endingStage.setResizable(false);
+            endingStage.setTitle("Success!");
+
+            endingStage.setScene(scene);
+            endingStage.show();
+
+
+        }
+
+        if(passSeq == 3 || fail == true){ // fail is there in case timer runs out and you can set it as fail = true
+            Stage endingStage = new Stage();
+            badJob = new Text("Game Over!");
+
+            badJob.setStroke(Color.RED);
+            badJob.setStyle("-fx-font: 50 arial");
+            VBox boi = new VBox();
+            boi.setAlignment(Pos.CENTER);
+            boi.getChildren().addAll(badJob, quit);
+            Scene scene = new Scene(boi, 720, 480);
+            endingStage.setResizable(false);
+            endingStage.setTitle("Success!");
+
+            endingStage.setScene(scene);
+            endingStage.show();
+
+        }
+        if(passSeq == 1){ // this is to pass to the next sequence
+            iSeq++;
+
+        }
+        // here is nothing
+
 
         if (actionEvent.getSource() == quit){
             System.exit(0);

@@ -47,43 +47,47 @@ public class Sequence {
 
     /*
     TO DO:
-        - unprivatize sizes of buffer (plz)
         - input it into the main, so the whole thing would work together
 
      */
-    public void sequenceProgression(int i, String[] sequence, String input, boolean success, boolean fail,
-                                       Buffer buffer, boolean pass){
-
+    public int sequenceProgression(int i, String[] sequence, String input,
+                                       Buffer buffer, int pass){
+    // 0- nothing, 1 - pass, 2 - success, 3 - fail
         String[] currentSequence = new String[sequence.length];
         currentSequence = sequence;
         if(i == (sequence.length - 1)){
             if(input == currentSequence[i]){
-                success = true;
+                pass = 2; // success
             }
             else{
                 if(buffer.is_full()){
-                    fail = true;
+                    pass = 3; //fail
                     // we trigger Game Over
                     // this is when the game should end, cause he didn't pass the last
                     // value of the sequence
                 }
-                pass = false;
+                else{
+                    pass = 0; // nothing
+                }
                 // if not, then nothing really
             }
         }
         else{
-            if(input == currentSequence[i]){
-                i++;
-                pass = true;
+            if(buffer.is_full()){
+                pass = 3;
+
+            }
+            else if(input == currentSequence[i]){
+                //i++;
+                pass = 1; // pass
 
             }
             else{
-                pass = false;
+                pass = 0; // nothing
                 //nothing really. Player has to chose another one
             }
         }
-        System.out.println("Pass Should've worked!!!");
-        //return pass;
+        return pass;
     }
 
 
