@@ -9,7 +9,7 @@ public class Puzzles {
     String[][] pickedMatrix = {};
     int buffSize = 0;
     int sequenceSize = 0;
-    int puzzleSize = 0;
+    //int puzzleSize = 0;
     Random randomPuzzle = new Random();
     int randomNum = 0;
 
