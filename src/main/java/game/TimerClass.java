@@ -1,65 +1,38 @@
 package game;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+import javafx.util.Duration;
+
+
 public class TimerClass {
-    int seconds = 2;
-    int signal;
-    int time;
-    // 0-success; 1-ran out of time; 2-failed complete; 3-quitted;
-    boolean timeStartStop = false;
-    boolean success = false;
-    boolean fail = false;
-    boolean ranOutOfTime = false;
+    static final int STARTTIME = 15;
+    Timeline timeline;
+    IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
 
-
-    //  NEED TO ADD IT TO THE SCENE, WHERE IT WOULD CHANGE the number each time
-    public int getTime(){
-        time = gameLaunched();
-        return seconds;
-    } // this needs some changes probably
-
-    /*
-
-
-     */
-
-    private int gameLaunched(){
-        timeStartStop = true;
-        return gameTimer();
+    public int getStartTime(){
+        return STARTTIME;
     }
 
-    private int gameTimer(){
-        if(ranOutOfTime == true){
-            timeStartStop = false;
-            signal = 1;
-        }
-        // fail is true can happen only by another part of the game
-        if(fail == true){
-            timeStartStop = false;
-            signal = 2;
-        }
-        //same thing as fail code
-        if(success == true){
-            timeStartStop = false;
-            signal = 0;
-        }
-        if(timeStartStop = true){
-            if(seconds <= 0){
-                ranOutOfTime = true;
-                signal = 1;
-            }
-            else{
-                seconds--;
-                //print?
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                gameTimer();
-            }
-        }
+    public IntegerProperty getTimeSeconds(){
+        return timeSeconds;
+    }
 
-        return signal;
+    public void handleTime(){
+        if (timeline != null) {
+            timeline.stop();
+        }
+        timeSeconds.set(STARTTIME);
+        timeline = new Timeline();
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(STARTTIME+1),
+                        new KeyValue(timeSeconds, 0)));
+        timeline.playFromStart();
     }
 
 }

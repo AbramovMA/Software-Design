@@ -3,8 +3,6 @@ package game;
 import game.TimerClass;
 import game.Puzzles;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -23,26 +21,22 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.KeyValue;
-import javafx.util.Duration;
 
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int NODES = 6;
     private static boolean orientation = true;
 
-    private static final Integer STARTTIME = 15;
-    private Timeline timeline;
-    private Label timerLabel = new Label();
-    private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
+
+    TimerClass time;
+
+    Label timerLabel;
 
     Text sequence;
     Text input;
     Text buffInfo;
     Button[][] matrix;
 
-    Puzzles ourPuzzle = new Puzzles();
+    Puzzles ourPuzzle;
 
     Button start;
     Button quit;
@@ -55,10 +49,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public void start(Stage primaryStage) {
         GridPane base = new GridPane();
 
-        timerLabel = new Label(Integer.toString(STARTTIME));
+        time = new TimerClass();
+
+        timerLabel = new Label(Integer.toString(time.getStartTime()));
         timerLabel.setTextFill(Color.BLUE);
         timerLabel.setFont(Font.font(30));
-        timerLabel.textProperty().bind(timeSeconds.asString());
+        timerLabel.textProperty().bind(time.getTimeSeconds().asString());
 
         start = new Button("Start");
         start.setOnAction(this);
@@ -68,6 +64,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         sequence = new Text("Press start to show sequence");
 
+        ourPuzzle = new Puzzles();
         ourPuzzle.puzzleGenerator();
 
 
@@ -142,15 +139,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         }
         if (actionEvent.getSource() == start){
             sequence.setText(stringedSeq);
-            if (timeline != null) {
-                timeline.stop();
-            }
-            timeSeconds.set(STARTTIME);
-            timeline = new Timeline();
-            timeline.getKeyFrames().add(
-                    new KeyFrame(Duration.seconds(STARTTIME+1),
-                            new KeyValue(timeSeconds, 0)));
-            timeline.playFromStart();
+            time.handleTime();
         }
     }
 }
