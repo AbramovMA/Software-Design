@@ -26,11 +26,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int NODES = 6;
     private static boolean orientation = true;
 
-
     TimerClass time;
-
+    Sequence currSeq;
     Label timerLabel;
-
     Text sequence;
     Text input;
     Text buffInfo;
@@ -40,6 +38,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     Button start;
     Button quit;
+
+    int iSeq = 0;
+    boolean success = false;
+    boolean fail = false;
+    boolean passSeq = false;
 
     private Parent createContent(){
         return null;
@@ -119,6 +122,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 if(actionEvent.getSource() == matrix[row][column]) {
                     ourPuzzle.buffer.add_value(matrix[row][column].getText());
                     ourPuzzle.buffer.update();
+                    //currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence,matrix[row][column].getText(),success, fail,
+                         //   ourPuzzle.buffer, passSeq);
                 }
                 matrix[row][column].setStyle(null);
                 if (actionEvent.getSource() == matrix[row][column] && !orientation) { //vertically color white with !orientation
