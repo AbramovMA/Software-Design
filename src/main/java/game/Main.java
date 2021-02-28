@@ -21,6 +21,8 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.util.Optional;
+
 
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int NODES = 6;
@@ -32,7 +34,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Text sequence;
     Text input;
     Text buffInfo;
-    Button[][] matrix;
+    //Button[][] matrix;
+    Matrix matrix;
 
     Puzzles ourPuzzle;
 
@@ -75,7 +78,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         input = new Text("");
 
         //NODES = ourPuzzle.puzzleSize;
-        matrix = new Button[NODES][NODES];
+        //matrix = new Button[NODES][NODES];
+        matrix = new Matrix(NODES, base, this);
+        matrix.set_values(ourPuzzle.pickedMatrix);
+        /*
         for(int x = 0; x < NODES; x++)
         {
             for(int y = 0; y < NODES; y++)
@@ -89,6 +95,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 //matrix[x][y].setDisable(true);
             }
         }
+        */
+
 
         SubScene matrixScene = new SubScene(base, 250, 250);
         SubScene othersScene = new SubScene(quit, 50, 25);
@@ -112,36 +120,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
-        for (int c = 0; c < NODES; c++) { //for resetting the matrix style after each click
-            for (int r = 0; r < NODES; r++) {
-                matrix[r][c].setStyle(null);
-            }
+        Optional<String> selected_matrix_value = matrix.get_selected_value(actionEvent);
+        if (selected_matrix_value.isPresent()){
+            String value = selected_matrix_value.get();
+            // use  value
+            ourPuzzle.buffer.add_value(value);
         }
-        for (int column = 0; column < NODES; column++) { //scans each row/column
-            for (int row = 0; row < NODES; row++) {
-                if(actionEvent.getSource() == matrix[row][column]) {
-                    ourPuzzle.buffer.add_value(matrix[row][column].getText());
-                    ourPuzzle.buffer.update();
-                    //currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence,matrix[row][column].getText(),success, fail,
-                         //   ourPuzzle.buffer, passSeq);
-                }
-                matrix[row][column].setStyle(null);
-                if (actionEvent.getSource() == matrix[row][column] && !orientation) { //vertically color white with !orientation
-                    for (column = 0; column < NODES; column++) {
-                        matrix[row][column].setStyle("-fx-background-color: #ffffff");
-                        orientation = true;
-                    }
-                    return;
-                }
-                else if (actionEvent.getSource() == matrix[row][column] && orientation) { //horizontally color white after orientation set to true
-                    for (row = 0; row < NODES; row++) {
-                        matrix[row][column].setStyle("-fx-background-color: #ffffff");
-                        orientation = false;
-                    }
-                    return;
-                }
-            }
-        }
+
+        //ourPuzzle.buffer.add_value(button_grid[row][column].getText());
+        //ourPuzzle.buffer.update();
+
+        //currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence,matrix[row][column].getText(),success, fail,
+        //   ourPuzzle.buffer, passSeq);
+
         if (actionEvent.getSource() == quit){
             System.exit(0);
         }
