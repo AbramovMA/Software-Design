@@ -45,13 +45,8 @@ final public class Buffer {
     /**
      * Returns 1 if the buffer reached its maximum capacity, 0 otherwise
      **/
-    final public boolean is_full(){ // don't change plz, it works now as intended
-         if(size == max_size){
-             return true;
-         }
-         else{
-             return false;
-         }
+    final public boolean is_full(){
+         return size == max_size;
     }
 
     /**
