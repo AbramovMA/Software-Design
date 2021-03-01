@@ -28,7 +28,8 @@ final public class Matrix {
      * Matrix constructor
      * requires a matrix size, a grid container and a handler for buttons
      **/
-    Matrix(int new_size, GridPane base, EventHandler<ActionEvent> eh){
+    Matrix(int new_size, GridPane base, EventHandler<ActionEvent> handler){
+        // set default values
         size        = new_size;
         button_grid = new Button[new_size][new_size];
         orientation = Orientation.horizontal;
@@ -36,15 +37,15 @@ final public class Matrix {
         for (int column = 0; column < size; ++column)
             for (int row = 0; row < size; ++row) {
                 button_grid[column][row] = new Button();
-                base.add(button_grid[column][row], column, row);
-                button_grid[column][row].setOnAction(eh);
+                base.add(button_grid[column][row], column, row); // add to screen
+                button_grid[column][row].setOnAction(handler);   // add button press detection
             }
 
-        update_availability(0,0);
+        update_availability(0,0); // create the initial set of available tiles
     }
 
     /**
-     * Initializes the text on the buttons from a 2D array of appropriate size
+     * Initializes the text on the buttons from a 2D array of labels of appropriate size
      **/
     public void set_values(String[][] values){
         for (int column = 0; column < size; ++column)
@@ -79,7 +80,7 @@ final public class Matrix {
 
     /**
      * Returns the coordinates of the button if a button press was registered by `actionEvent`
-     * Returns `Optional.empty()` otherwise
+     * Returns `Optional.empty` otherwise
      **/
     private Optional<Point> get_selected_position(ActionEvent actionEvent){
         for (int column = 0; column < size; column++)
@@ -87,13 +88,12 @@ final public class Matrix {
                 if (actionEvent.getSource() == button_grid[column][row])
                     return Optional.of(new Point(column, row));
 
-        // if no button was pressed
         return Optional.empty();
     }
 
     /**
      * Returns the text on the button if a button press was registered by `actionEvent`
-     * Returns `Optional.empty()` otherwise
+     * Returns `Optional.empty` otherwise
      **/
     public Optional<String> get_selected_value(ActionEvent actionEvent){
         Optional<Point> selected_position = get_selected_position(actionEvent);

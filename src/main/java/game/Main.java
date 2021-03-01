@@ -1,8 +1,5 @@
 package game;
 
-import game.TimerClass;
-import game.Puzzles;
-
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -25,8 +22,7 @@ import java.util.Optional;
 
 
 public class Main extends Application implements EventHandler<ActionEvent> {
-    private static final int NODES = 6;
-    private static boolean orientation = true;
+    private static final int matrix_size = 6;
 
     TimerClass time;
     Sequence currSeq;
@@ -82,26 +78,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
 
-        //NODES = ourPuzzle.puzzleSize;
-        //matrix = new Button[NODES][NODES];
-        matrix = new Matrix(NODES, base, this);
+        matrix = new Matrix(matrix_size, base, this);
         matrix.set_values(ourPuzzle.pickedMatrix);
-        /*
-        for(int x = 0; x < NODES; x++)
-        {
-            for(int y = 0; y < NODES; y++)
-            {
-                matrix[x][y] = new Button();
-                matrix[x][y].setText(ourPuzzle.pickedMatrix[x][y]);
-
-                base.add(matrix[x][y], x, y);
-
-                matrix[x][y].setOnAction(this);
-                //matrix[x][y].setDisable(true);
-            }
-        }
-        */
-
 
         SubScene matrixScene = new SubScene(base, 250, 250);
         SubScene othersScene = new SubScene(quit, 50, 25);
@@ -128,7 +106,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         Optional<String> selected_matrix_value = matrix.get_selected_value(actionEvent);
         if (selected_matrix_value.isPresent()){
             String value = selected_matrix_value.get();
-            // use  value
+
             ourPuzzle.buffer.add_value(value);
             passSeq = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
                     ourPuzzle.buffer, passSeq);
