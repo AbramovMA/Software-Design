@@ -5,72 +5,105 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
-import java.util.Arrays;
+import java.awt.*;
 import java.util.Optional;
 
 final public class Matrix {
     private final Button[][] button_grid;
     private final int size;
-    private boolean orientation;
+    private Orientation orientation;
 
+    private enum Orientation{
+        horizontal, vertical;
+
+        Orientation opposite(){
+            if (this == horizontal)
+                return vertical;
+            else
+                return horizontal;
+        }
+    }
+
+    /**
+     * Matrix constructor
+     * requires a matrix size, a grid container and a handler for buttons
+     **/
     Matrix(int new_size, GridPane base, EventHandler<ActionEvent> eh){
         size        = new_size;
         button_grid = new Button[new_size][new_size];
-        orientation = true;
+        orientation = Orientation.horizontal;
 
-        for (int i = 0; i < size; ++i)
-            for (int j = 0; j < size; ++j) {
-                button_grid[i][j] = new Button();
-                base.add(button_grid[i][j], i, j);
-                button_grid[i][j].setOnAction(eh);
+        for (int column = 0; column < size; ++column)
+            for (int row = 0; row < size; ++row) {
+                button_grid[column][row] = new Button();
+                base.add(button_grid[column][row], column, row);
+                button_grid[column][row].setOnAction(eh);
             }
+
+        update_availability(0,0);
     }
 
+    /**
+     * Initializes the text on the buttons from a 2D array of appropriate size
+     **/
     public void set_values(String[][] values){
-        for (int i = 0; i < size; ++i)
-            for (int j = 0; j < size; ++j)
-                button_grid[i][j].setText(values[i][j]);
+        for (int column = 0; column < size; ++column)
+            for (int row = 0; row < size; ++row)
+                button_grid[column][row].setText(values[column][row]);
     }
 
-    private void reset_style(){
-        for (int column = 0; column < size; column++) {
+    /**
+     * Updates the buttons such that the user cannot press
+     * the buttons which are not available to them
+     **/
+    private void update_availability(int selected_column, int selected_row){
+        for (int column = 0; column < size; column++)
             for (int row = 0; row < size; row++) {
-                button_grid[row][column].setStyle(null);
+                //button_grid[column][row].setStyle("-fx-background-color: #ff0000");
+                button_grid[column][row].setDisable(true);
             }
-        }
+
+        if (orientation == Orientation.horizontal)
+            for (int column = 0; column < size; column++) {
+                //button_grid[column][selected_row].setStyle("-fx-background-color: #00ff00");
+                button_grid[column][selected_row].setDisable(false);
+            }
+        else
+            for (int row = 0; row < size; row++) {
+                //button_grid[selected_column][row].setStyle("-fx-background-color: #00ff00");
+                button_grid[selected_column][row].setDisable(false);
+            }
+
+        orientation = orientation.opposite();
     }
 
+    /**
+     * Returns the coordinates of the button if a button press was registered by `actionEvent`
+     * Returns `Optional.empty()` otherwise
+     **/
+    private Optional<Point> get_selected_position(ActionEvent actionEvent){
+        for (int column = 0; column < size; column++)
+            for (int row = 0; row < size; row++)
+                if (actionEvent.getSource() == button_grid[column][row])
+                    return Optional.of(new Point(column, row));
+
+        // if no button was pressed
+        return Optional.empty();
+    }
+
+    /**
+     * Returns the text on the button if a button press was registered by `actionEvent`
+     * Returns `Optional.empty()` otherwise
+     **/
     public Optional<String> get_selected_value(ActionEvent actionEvent){
-        boolean has_selected  = false;
-        int selected_row      = -1;
-        int selected_column   = -1;
+        Optional<Point> selected_position = get_selected_position(actionEvent);
+        if (selected_position.isPresent()){
+            Point position = selected_position.get();
+            int selected_column = position.x;
+            int selected_row    = position.y;
 
-        for (int column = 0; column < size; column++) {
-            for (int row = 0; row < size; row++) {
-                if(actionEvent.getSource() == button_grid[row][column]) {
-                    has_selected    = true;
-                    selected_row    = row;
-                    selected_column = column;
-                }
-            }
-        }
-
-        if(has_selected) {
-            reset_style();
-
-            if (orientation) {
-                for (int row = 0; row < size; row++) {
-                    button_grid[row][selected_column].setStyle("-fx-background-color: #ffffff");
-                }
-            } else {
-                for (int column = 0; column < size; column++) {
-                    button_grid[selected_row][column].setStyle("-fx-background-color: #ffffff");
-                }
-            }
-
-            orientation = !orientation;
-
-            return Optional.of(button_grid[selected_row][selected_column].getText());
+            update_availability(selected_column, selected_row);
+            return Optional.of(button_grid[selected_column][selected_row].getText());
         } else
             return Optional.empty();
     }
