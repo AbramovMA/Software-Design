@@ -3,11 +3,14 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand />
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="26104dff-3231-4772-b45f-d27db1befaa6" name="Default Changelist" comment="TimerClass partial implementation and game.fxml change">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/game.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/timeThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/TimerClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/TimerClass.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,5 +128,31 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="TimerClass partial implementation and game.fxml change" />
     <option name="LAST_COMMIT_MESSAGE" value="TimerClass partial implementation and game.fxml change" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="93" y="93" width="1862" height="926" key="DiffContextDialog" timestamp="1614616358695">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="93" y="93" width="1862" height="926" key="DiffContextDialog/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614616358695" />
+    <state width="2005" height="234" key="GridCell.Tab.0.bottom" timestamp="1614616116010">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="234" key="GridCell.Tab.0.bottom/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614616116010" />
+    <state width="2005" height="234" key="GridCell.Tab.0.center" timestamp="1614616116010">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="234" key="GridCell.Tab.0.center/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614616116010" />
+    <state width="2005" height="234" key="GridCell.Tab.0.left" timestamp="1614616116010">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="234" key="GridCell.Tab.0.left/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614616116010" />
+    <state width="2005" height="234" key="GridCell.Tab.0.right" timestamp="1614616116010">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="234" key="GridCell.Tab.0.right/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614616116010" />
+    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614616357581">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614616357581" />
   </component>
 </project>
