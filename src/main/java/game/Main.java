@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-import java.util.Optional;
+import java.util.*;
 
 
 public class Main extends Application implements EventHandler<ActionEvent> {
@@ -171,8 +171,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         if (actionEvent.getSource() == start){
             sequence.setText(stringedSeq);
             time.handleTime();
-            Thread timerThread = new Thread(new timeThread());
-            timerThread.start();
+            new timeThread(time.getStartTime());
 
         }
     }

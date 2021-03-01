@@ -11,7 +11,7 @@ import javafx.util.*;
 
 
 public class TimerClass extends Main{
-    static final int STARTTIME = 2;
+    static final int STARTTIME = 5;
     Timeline timeline;
     IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
 
