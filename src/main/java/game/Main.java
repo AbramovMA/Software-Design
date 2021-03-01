@@ -46,8 +46,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button quit;
 
     int iSeq = 0;
-    boolean success = false;
-    boolean fail = false;
+    boolean victory = false;
+    boolean gameOver = false;
     int passSeq = 0;
 
     private Parent createContent(){
@@ -143,19 +143,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             goodJob.setStroke(Color.GREEN);
             goodJob.setStyle("-fx-font: 50 arial");
 
-            VBox boi = new VBox();
-            boi.setAlignment(Pos.CENTER);
-            boi.getChildren().addAll(goodJob, quit);
+            VBox endingBox = new VBox();
+            endingBox.setAlignment(Pos.CENTER);
+            endingBox.getChildren().addAll(goodJob, quit);
 
-            Scene scene = new Scene(boi, 720, 480);
+            Scene scene = new Scene(endingBox, 720, 480);
             endingStage.setResizable(false);
-            endingStage.setTitle("Success!");
+            endingStage.setTitle("Victory!");
 
             endingStage.setScene(scene);
             endingStage.show();
         }
 
-        if(passSeq == 3 || fail == true){ // fail is there in case timer runs out and you can set it as fail = true
+        if(passSeq == 3 || gameOver == true){ // gameOver is there in case timer runs out and you can set it as gameOver = true
             System.out.println(passSeq + ": Game Over");
 
             Stage endingStage = new Stage();
@@ -164,11 +164,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             badJob.setStroke(Color.RED);
             badJob.setStyle("-fx-font: 50 arial");
 
-            VBox boi = new VBox();
-            boi.setAlignment(Pos.CENTER);
-            boi.getChildren().addAll(badJob, quit);
+            VBox endingBox = new VBox();
+            endingBox.setAlignment(Pos.CENTER);
+            endingBox.getChildren().addAll(badJob, quit);
 
-            Scene scene = new Scene(boi, 720, 480);
+            Scene scene = new Scene(endingBox, 720, 480);
             endingStage.setResizable(false);
             endingStage.setTitle("Game Over!");
 
