@@ -47,9 +47,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     boolean gameOver = false;
     int passSeq = 0;
 
-    private Parent createContent(){
-        return null;
-    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -174,6 +171,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         if (actionEvent.getSource() == start){
             sequence.setText(stringedSeq);
             time.handleTime();
+            Thread timerThread = new Thread(new timeThread());
+            timerThread.start();
+
         }
     }
 }
