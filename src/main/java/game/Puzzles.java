@@ -10,8 +10,6 @@ public class Puzzles {
     Random randomPuzzle = new Random();
     int randomNum = 0;
 
-    Buffer buffer;
-
 
     public void puzzleGenerator(){
         //System.out.println("Pass 00");
@@ -121,7 +119,6 @@ public class Puzzles {
             sequenceSize = 3;
             pickedSequence = new String[] {"ER", "RO", "R!"};
         }
-        buffer = new Buffer(buffSize);
     }
 
 

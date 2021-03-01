@@ -37,6 +37,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Text badJob;
 
     Puzzles ourPuzzle;
+    Buffer buffer;
 
     Button start;
     Button quit;
@@ -74,6 +75,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         ourPuzzle = new Puzzles();
         ourPuzzle.puzzleGenerator();
 
+        buffer = new Buffer(ourPuzzle.buffSize);
+
 
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
@@ -86,7 +89,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit,ourPuzzle.buffer.contents);
+        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit,buffer.contents);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -107,9 +110,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         if (selected_matrix_value.isPresent()){
             String value = selected_matrix_value.get();
 
-            ourPuzzle.buffer.add_value(value);
+            buffer.add_value(value);
             passSeq = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
-                    ourPuzzle.buffer, passSeq);
+                    buffer, passSeq);
         }
 
         if(passSeq == 2){  //Winner Winner, Chicken Dinner
