@@ -37,7 +37,7 @@ public class TimerClass extends Main{
                 new KeyFrame(Duration.seconds(STARTTIME+1),
                         new KeyValue(timeSeconds, 0)));
         timeline.play();
-        timeGameOver = true;
+        //timeGameOver = true;
 
     }
 }

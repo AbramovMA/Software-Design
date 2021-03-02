@@ -151,7 +151,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             endingStage.show();
         }
 
-        if(passSeq == 3 || time.timeGameOver == true){
+        if(passSeq == 3){ //here is gameOver boolean
             // gameOver is there in case timer runs out and you can set it as gameOver = true
             System.out.println(passSeq + ": Game Over");
 

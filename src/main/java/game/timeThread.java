@@ -19,7 +19,7 @@ public class timeThread extends Main {
             System.out.println("time is up!");
            //getGameOver();
             timer.cancel(); // Terminate the timer thread
-            timeGameOver = true;
+            //timeGameOver = true;
             //getGameOver();
             //System.exit(0);
 
