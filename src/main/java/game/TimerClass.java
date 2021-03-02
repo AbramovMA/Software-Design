@@ -14,6 +14,8 @@ public class TimerClass extends Main{
     static final int STARTTIME = 5;
     Timeline timeline;
     IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
+    boolean timeGameOver = false;
+
 
     public int getStartTime(){
         return STARTTIME;
@@ -26,6 +28,7 @@ public class TimerClass extends Main{
     public void handleTime(){
         if (timeline != null) {
             timeline.stop();
+            //getGameOver();
         }
 
         timeSeconds.set(STARTTIME);
@@ -34,5 +37,7 @@ public class TimerClass extends Main{
                 new KeyFrame(Duration.seconds(STARTTIME+1),
                         new KeyValue(timeSeconds, 0)));
         timeline.play();
+        timeGameOver = true;
+
     }
 }

@@ -43,10 +43,28 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button quit;
 
     int iSeq = 0;
-    boolean victory = false;
-    boolean gameOver = false;
+    //boolean victory = false;
+    //boolean gameOver = false;
     int passSeq = 0;
 
+    public void getGameOver(){
+        Stage endingStage = new Stage();
+        badJob = new Text("Game Over!");
+
+        badJob.setStroke(Color.RED);
+        badJob.setStyle("-fx-font: 50 arial");
+
+        VBox endingBox = new VBox();
+        endingBox.setAlignment(Pos.CENTER);
+        endingBox.getChildren().addAll(badJob, quit);
+
+        Scene scene = new Scene(endingBox, 720, 480);
+        endingStage.setResizable(false);
+        endingStage.setTitle("Game Over!");
+
+        endingStage.setScene(scene);
+        endingStage.show();
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -133,25 +151,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             endingStage.show();
         }
 
-        if(passSeq == 3 || gameOver == true){ // gameOver is there in case timer runs out and you can set it as gameOver = true
+        if(passSeq == 3 || time.timeGameOver == true){
+            // gameOver is there in case timer runs out and you can set it as gameOver = true
             System.out.println(passSeq + ": Game Over");
 
-            Stage endingStage = new Stage();
-            badJob = new Text("Game Over!");
-
-            badJob.setStroke(Color.RED);
-            badJob.setStyle("-fx-font: 50 arial");
-
-            VBox endingBox = new VBox();
-            endingBox.setAlignment(Pos.CENTER);
-            endingBox.getChildren().addAll(badJob, quit);
-
-            Scene scene = new Scene(endingBox, 720, 480);
-            endingStage.setResizable(false);
-            endingStage.setTitle("Game Over!");
-
-            endingStage.setScene(scene);
-            endingStage.show();
+            getGameOver();
 
         }
         if(passSeq == 1){ // this is to pass to the next sequence
