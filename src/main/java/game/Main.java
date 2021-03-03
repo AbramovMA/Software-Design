@@ -165,18 +165,18 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             //of the sequence player is right now
 
         }
-
         // here is nothing
 
 
         if (actionEvent.getSource() == quit){
             System.exit(0);
         }
+
         if (actionEvent.getSource() == start){
             sequence.setText(stringedSeq);
             time.handleTime();
             new timeThread(time.getStartTime());
-
+            start.setVisible(false);
         }
     }
 }
