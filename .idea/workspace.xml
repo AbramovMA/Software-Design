@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="software-design-vu-2020.main:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -9,18 +14,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26104dff-3231-4772-b45f-d27db1befaa6" name="Default Changelist" comment="Main class is cleaned up a bit and TimerClass is not totally done yet">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/software_design_vu_2020_main_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/timeThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/timeThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/software_design_vu_2020_jar/software-design-vu-2020.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,11 +81,26 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.Main">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="game.Main" />
       <module name="software-design-vu-2020.main" />
@@ -99,17 +119,6 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="game.TimerClass" />
       <module name="software-design-vu-2020" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -166,35 +175,5 @@
     <MESSAGE value="TimerClass partial implementation and game.fxml change" />
     <MESSAGE value="Main class is cleaned up a bit and TimerClass is not totally done yet" />
     <option name="LAST_COMMIT_MESSAGE" value="Main class is cleaned up a bit and TimerClass is not totally done yet" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="93" y="93" width="1862" height="926" key="DiffContextDialog" timestamp="1614616358695">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="93" y="93" width="1862" height="926" key="DiffContextDialog/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614616358695" />
-    <state width="2005" height="234" key="GridCell.Tab.0.bottom" timestamp="1614617360663">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="2005" height="234" key="GridCell.Tab.0.bottom/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614617360663" />
-    <state width="2005" height="234" key="GridCell.Tab.0.center" timestamp="1614617360663">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="2005" height="234" key="GridCell.Tab.0.center/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614617360663" />
-    <state width="2005" height="234" key="GridCell.Tab.0.left" timestamp="1614617360663">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="2005" height="234" key="GridCell.Tab.0.left/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614617360663" />
-    <state width="2005" height="234" key="GridCell.Tab.0.right" timestamp="1614617360663">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="2005" height="234" key="GridCell.Tab.0.right/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614617360663" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1614616451926">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614616451926" />
-    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614616671674">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/305.1440.1536.824/2560.-416.1080.2520/0.0.2048.1112@0.0.2048.1112" timestamp="1614616671674" />
   </component>
 </project>
