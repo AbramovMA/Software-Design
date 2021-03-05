@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="software-design-vu-2020.main:jar" />
+      <artifact name="software-design-vu-2020:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -13,9 +13,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="951ee960-a334-4af2-9348-660898e0956c" name="Default Changelist" comment="Jar attempt 2">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/software_design_vu_2020_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/software_design_vu_2020_main_jar.xml" beforeDir="false" />
+    <list default="true" id="951ee960-a334-4af2-9348-660898e0956c" name="Default Changelist" comment="Jar attempt 3">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/software_design_vu_2020_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614955882881</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Jar attempt 3">
+      <created>1614956910024</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1614956910024</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,6 +180,7 @@
     <MESSAGE value="TimerClass partial implementation and game.fxml change" />
     <MESSAGE value="Main class is cleaned up a bit and TimerClass is not totally done yet" />
     <MESSAGE value="Jar attempt 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Jar attempt 2" />
+    <MESSAGE value="Jar attempt 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jar attempt 3" />
   </component>
 </project>
