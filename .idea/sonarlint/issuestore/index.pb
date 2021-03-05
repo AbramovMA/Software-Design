@@ -34,3 +34,15 @@ Z
 *.gradle/buildOutputCleanup/outputFiles.bin,a\f\affd37cd1229eda4e03578f6dd1caa731ade4dd4
 Y
 ).gradle/5.2.1/javaCompile/taskHistory.bin,3\4\343be079470ba2d832f216820dfc708e1f530b72
+Q
+!src/main/java/game/GridLogic.java,4\5\4513c52d231f0ca93dcc7f72919f236967937f5f
+N
+src/main/java/game/Buffer.java,4\9\49db285449bca6044a504b618b086250ca9327e3
+O
+src/main/java/game/Puzzles.java,c\5\c586d6c99f3ee8444a8a1f5428d999c483d56669
+P
+ src/main/java/game/Sequence.java,4\5\458c3158432e431497a8cbdf1be9d6ca7aba4d40
+R
+"src/main/java/game/timeThread.java,c\2\c2df71c13f445af4424146f7c684d8a0d9c0e62a
+d
+4.idea/artifacts/software_design_vu_2020_main_jar.xml,e\9\e9c9196b3f56604a366996d174ff3df96e4de6d8

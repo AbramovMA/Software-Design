@@ -1,21 +1,13 @@
 
-X	java:S125@"<This block of commented-out lines of code should be removed.(£ËÓ€8Óâ–Ìı.
-]	java:S125W"<This block of commented-out lines of code should be removed.(ÉÑª¼ûÿÿÿÿ8Çì˜©ı.
-X	java:S1259"<This block of commented-out lines of code should be removed.(†¥¯¿8Çì˜©ı.
-@
-java:S21190"Save and re-use this "Random".(šŸ«íøÿÿÿÿ8Çì˜©ı.
-X
-java:S1128";Remove this unused import 'javafx.scene.control.TextField'.(¨¢¤¶8ëéñËı.
-q
-java:S1128"TRemove this unnecessary import: same package classes are always implicitly imported.(—óÚØ8Æì˜©ı.
-p
-java:S1128"TRemove this unnecessary import: same package classes are always implicitly imported.(¨šŒ8Çì˜©ı.
-X	java:S125"<This block of commented-out lines of code should be removed.(üæà8¢‚ÒËı.
-]	java:S125L"<This block of commented-out lines of code should be removed.(«™üìûÿÿÿÿ8Çì˜©ı.
-W
-java:S1128":Remove this unused import 'javafx.scene.layout.StackPane'.(™÷èò8Çì˜©ı.
-q
-java:S1128"TRemove this unnecessary import: same package classes are always implicitly imported.(£Ö†ş8Çì˜©ı.
-X	java:S125F"<This block of commented-out lines of code should be removed.(ïñ‡8Åš¬Ìı.
-]	java:S125>"<This block of commented-out lines of code should be removed.(ŒÏ‚¹øÿÿÿÿ8Çì˜©ı.
-]	java:S125"<This block of commented-out lines of code should be removed.(‰ÍÛïúÿÿÿÿ8àéçÍı.
+M
+java:S1128"0Remove this unused import 'javafx.scene.Parent'.(²ä¡È8ÊàÄÿ.
+V	java:S106œ"9Replace this use of System.out or System.err by a logger.(ÏÂ³«8ÈäåÄÿ.
+]	java:S125."<This block of commented-out lines of code should be removed.(‘–ˆˆùÿÿÿÿ8ÊàÄÿ.
+a
+java:S1854g"?Remove this useless assignment to local variable "othersScene".(ªê½áıÿÿÿÿ8ÈäåÄÿ.
+R
+java:S1481g"0Remove this unused "othersScene" local variable.(ªê½áıÿÿÿÿ8ÈäåÄÿ.
+m	java:S117|"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğß³æ8ÈäåÄÿ.
+[	java:S106†"9Replace this use of System.out or System.err by a logger.(ŸÂí±ùÿÿÿÿ8ÈäåÄÿ.
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ÿ–¸Ù8ÊàÄÿ.
+[	java:S106¢"9Replace this use of System.out or System.err by a logger.(¨¹àùÿÿÿÿ8ÈäåÄÿ.
