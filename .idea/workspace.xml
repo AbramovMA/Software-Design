@@ -13,9 +13,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="951ee960-a334-4af2-9348-660898e0956c" name="Default Changelist" comment="Jar attempt 4">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/software_design_vu_2020_main_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/software_design_vu_2020_main_jar.xml" afterDir="false" />
+    <list default="true" id="951ee960-a334-4af2-9348-660898e0956c" name="Default Changelist" comment="Jar attempt 5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/software_design_vu_2020_main_jar/software-design-vu-2020.main.jar" beforeDir="false" />
     </list>
@@ -182,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614957331735</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Jar attempt 5">
+      <created>1614961980067</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1614961980067</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -203,6 +208,7 @@
     <MESSAGE value="Jar attempt 2" />
     <MESSAGE value="Jar attempt 3" />
     <MESSAGE value="Jar attempt 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Jar attempt 4" />
+    <MESSAGE value="Jar attempt 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jar attempt 5" />
   </component>
 </project>
