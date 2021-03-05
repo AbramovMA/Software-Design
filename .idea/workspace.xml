@@ -13,10 +13,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="951ee960-a334-4af2-9348-660898e0956c" name="Default Changelist" comment="Jar attempt 5">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/software_design_vu_2020_main_jar/software-design-vu-2020.main.jar" beforeDir="false" />
-    </list>
+    <list default="true" id="951ee960-a334-4af2-9348-660898e0956c" name="Default Changelist" comment="relocate &quot;out&quot; folder into &quot;build&quot; folder" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,6 +75,12 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Irakliy\Desktop\BCS_Y2\SoftDesign asses\Software-Design" />
+      <recent name="C:\Users\Irakliy\Desktop\BCS_Y2\SoftDesign asses\Software-Design\build" />
+    </key>
   </component>
   <component name="RunManager" selected="JAR Application.software-design-vu-2020.main.jar">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
@@ -187,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614961980067</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="relocate &quot;out&quot; folder into &quot;build&quot; folder">
+      <created>1614965200932</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1614965200932</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,6 +219,7 @@
     <MESSAGE value="Jar attempt 3" />
     <MESSAGE value="Jar attempt 4" />
     <MESSAGE value="Jar attempt 5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Jar attempt 5" />
+    <MESSAGE value="relocate &quot;out&quot; folder into &quot;build&quot; folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="relocate &quot;out&quot; folder into &quot;build&quot; folder" />
   </component>
 </project>
