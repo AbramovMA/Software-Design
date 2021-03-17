@@ -1,6 +1,16 @@
 package game;
 
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
 public class Sequence {
+    
+//    Main main = new Main();
 
     //This code decides if the player progresses in the game
     public int sequenceProgression(int i, String[] sequence, String input,
@@ -50,6 +60,44 @@ public class Sequence {
         }
         return updateSequence;
 
+    }
+
+    public void getGameOver(Text badJob, Button quit){
+        Stage endingStage = new Stage();
+        badJob = new Text("Game Over!");
+
+        badJob.setStroke(Color.RED);
+        badJob.setStyle("-fx-font: 50 arial");
+
+        VBox endingBox = new VBox();
+        endingBox.setAlignment(Pos.CENTER);
+        endingBox.getChildren().addAll(badJob, quit);
+
+        Scene scene = new Scene(endingBox, 720, 480);
+        endingStage.setResizable(false);
+        endingStage.setTitle("Game Over!");
+
+        endingStage.setScene(scene);
+        endingStage.show();
+    }
+
+    public void getWinner(Text goodJob, Button quit){
+        Stage endingStage = new Stage();
+        goodJob = new Text("You're a Winner!");
+
+        goodJob.setStroke(Color.GREEN);
+        goodJob.setStyle("-fx-font: 50 arial");
+
+        VBox endingBox = new VBox();
+        endingBox.setAlignment(Pos.CENTER);
+        endingBox.getChildren().addAll(goodJob, quit);
+
+        Scene scene = new Scene(endingBox, 720, 480);
+        endingStage.setResizable(false);
+        endingStage.setTitle("Victory!");
+
+        endingStage.setScene(scene);
+        endingStage.show();
     }
 
 

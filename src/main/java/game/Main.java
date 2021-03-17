@@ -47,43 +47,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     //boolean gameOver = false;
     int passSeq = 0;
 
-    public void getGameOver(){
-        Stage endingStage = new Stage();
-        badJob = new Text("Game Over!");
 
-        badJob.setStroke(Color.RED);
-        badJob.setStyle("-fx-font: 50 arial");
-
-        VBox endingBox = new VBox();
-        endingBox.setAlignment(Pos.CENTER);
-        endingBox.getChildren().addAll(badJob, quit);
-
-        Scene scene = new Scene(endingBox, 720, 480);
-        endingStage.setResizable(false);
-        endingStage.setTitle("Game Over!");
-
-        endingStage.setScene(scene);
-        endingStage.show();
-    }
-
-    public void getWinner(){
-        Stage endingStage = new Stage();
-        goodJob = new Text("You're a Winner!");
-
-        goodJob.setStroke(Color.GREEN);
-        goodJob.setStyle("-fx-font: 50 arial");
-
-        VBox endingBox = new VBox();
-        endingBox.setAlignment(Pos.CENTER);
-        endingBox.getChildren().addAll(goodJob, quit);
-
-        Scene scene = new Scene(endingBox, 720, 480);
-        endingStage.setResizable(false);
-        endingStage.setTitle("Victory!");
-
-        endingStage.setScene(scene);
-        endingStage.show();
-    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -153,13 +117,13 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         if(passSeq == 2){  //Winner Winner, Chicken Dinner
             System.out.println(passSeq + ": Winner");
-            getWinner();
+            currSeq.getWinner(goodJob, quit);
         }
 
         if(passSeq == 3){
             // gameOver is there in case timer runs out and you can set it as gameOver = true
             System.out.println(passSeq + ": Game Over");
-            getGameOver();
+            currSeq.getGameOver(badJob,quit);
         }
         if(passSeq == 1){ // this is to pass to the next sequence
             System.out.println(passSeq + ": next one.");
