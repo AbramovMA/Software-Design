@@ -9,10 +9,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Sequence {
-    
-//    Main main = new Main();
 
-    //This code decides if the player progresses in the game
+
+    //This function decides if the player progresses in the game
     public int sequenceProgression(int i, String[] sequence, String input,
                                        Buffer buffer, int pass){
     // 0- nothing, 1 - pass, 2 - success, 3 - fail
@@ -24,15 +23,13 @@ public class Sequence {
             }
             else{
                 if(buffer.is_full()){
-                    pass = 3; //fail
-                    // we trigger Game Over
+                    pass = 3; // we trigger Game Over
                     // this is when the game should end, cause he didn't pass the last
                     // value of the sequence
                 }
                 else{
                     pass = 0; // nothing
                 }
-                // if not, then nothing really
             }
         }
         else{
@@ -46,8 +43,7 @@ public class Sequence {
 
             }
             else{
-                pass = 0; // nothing
-                //nothing really. Player has to chose another one
+                pass = 0; //nothing really. Player has to chose another one
             }
         }
         return pass;
@@ -62,6 +58,7 @@ public class Sequence {
 
     }
 
+    //this function announces game over
     public void getGameOver(Text badJob, Button quit){
         Stage endingStage = new Stage();
         badJob = new Text("Game Over!");
@@ -81,6 +78,7 @@ public class Sequence {
         endingStage.show();
     }
 
+    //this function announces that player won
     public void getWinner(Text goodJob, Button quit){
         Stage endingStage = new Stage();
         goodJob = new Text("You're a Winner!");
@@ -99,8 +97,5 @@ public class Sequence {
         endingStage.setScene(scene);
         endingStage.show();
     }
-
-
-
 
 }
