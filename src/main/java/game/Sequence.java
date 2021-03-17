@@ -2,8 +2,7 @@ package game;
 
 public class Sequence {
 
-    //visuals???
-
+    //This code decides if the player progresses in the game
     public int sequenceProgression(int i, String[] sequence, String input,
                                        Buffer buffer, int pass){
     // 0- nothing, 1 - pass, 2 - success, 3 - fail
@@ -43,6 +42,16 @@ public class Sequence {
         }
         return pass;
     }
+
+    public String[] arrayRemove(String[] sequence, int count){
+        String [] updateSequence = new String[sequence.length - (count)];
+        for(int i = 0; i < updateSequence.length; i++){
+            updateSequence[i] = sequence[i+count];
+        }
+        return updateSequence;
+
+    }
+
 
 
 

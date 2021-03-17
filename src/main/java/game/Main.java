@@ -66,6 +66,25 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         endingStage.show();
     }
 
+    public void getWinner(){
+        Stage endingStage = new Stage();
+        goodJob = new Text("You're a Winner!");
+
+        goodJob.setStroke(Color.GREEN);
+        goodJob.setStyle("-fx-font: 50 arial");
+
+        VBox endingBox = new VBox();
+        endingBox.setAlignment(Pos.CENTER);
+        endingBox.getChildren().addAll(goodJob, quit);
+
+        Scene scene = new Scene(endingBox, 720, 480);
+        endingStage.setResizable(false);
+        endingStage.setTitle("Victory!");
+
+        endingStage.setScene(scene);
+        endingStage.show();
+    }
+
     @Override
     public void start(Stage primaryStage) {
         GridPane base = new GridPane();
@@ -119,6 +138,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
+        //tring[] updatedSequence = ourPuzzle.pickedSequence; //this is for visuals
+
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
         Optional<String> selected_matrix_value = matrix.get_selected_value(actionEvent);
@@ -132,38 +153,22 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         if(passSeq == 2){  //Winner Winner, Chicken Dinner
             System.out.println(passSeq + ": Winner");
-
-            Stage endingStage = new Stage();
-            goodJob = new Text("You're a Winner!");
-
-            goodJob.setStroke(Color.GREEN);
-            goodJob.setStyle("-fx-font: 50 arial");
-
-            VBox endingBox = new VBox();
-            endingBox.setAlignment(Pos.CENTER);
-            endingBox.getChildren().addAll(goodJob, quit);
-
-            Scene scene = new Scene(endingBox, 720, 480);
-            endingStage.setResizable(false);
-            endingStage.setTitle("Victory!");
-
-            endingStage.setScene(scene);
-            endingStage.show();
+            getWinner();
         }
 
         if(passSeq == 3){
             // gameOver is there in case timer runs out and you can set it as gameOver = true
             System.out.println(passSeq + ": Game Over");
-
             getGameOver();
-
         }
         if(passSeq == 1){ // this is to pass to the next sequence
             System.out.println(passSeq + ": next one.");
             iSeq++;
-            //need to add some visuals, so player could see, on which part
-            //of the sequence player is right now
+            String[] updateSequence;
 
+            updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
+            stringedSeq = String.join(" ", updateSequence);
+            sequence.setText(stringedSeq);
         }
         // here is nothing
 
