@@ -24,6 +24,9 @@ import java.util.*;
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int matrix_size = 6;
 
+    Score score;
+    Label scoreLabel;
+
     TimerClass time;
     Sequence currSeq;
     Label timerLabel;
@@ -56,7 +59,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox endingBox = new VBox();
         endingBox.setAlignment(Pos.CENTER);
-        endingBox.getChildren().addAll(badJob, quit);
+        endingBox.getChildren().addAll(scoreLabel,badJob, quit);
 
         Scene scene = new Scene(endingBox, 720, 480);
         endingStage.setResizable(false);
@@ -70,9 +73,15 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public void start(Stage primaryStage) {
         GridPane base = new GridPane();
 
+        score = new Score();
+
         currSeq = new Sequence();
 
         time = new TimerClass();
+
+        scoreLabel = new Label(Integer.toString(score.getScore()));
+        scoreLabel.setTextFill(Color.YELLOWGREEN);
+        scoreLabel.setFont(Font.font(25));
 
         timerLabel = new Label(Integer.toString(time.getStartTime()));
         timerLabel.setTextFill(Color.BLUE);
@@ -104,7 +113,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit,buffer.contents);
+        root.getChildren().addAll(scoreLabel,start,timerLabel,buffInfo,sequence,input,matrixScene,quit,buffer.contents);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -132,7 +141,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         if(passSeq == 2){  //Winner Winner, Chicken Dinner
             System.out.println(passSeq + ": Winner");
-
+            System.out.println(score.getScore());
             Stage endingStage = new Stage();
             goodJob = new Text("You're a Winner!");
 
@@ -141,7 +150,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
             VBox endingBox = new VBox();
             endingBox.setAlignment(Pos.CENTER);
-            endingBox.getChildren().addAll(goodJob, quit);
+            endingBox.getChildren().addAll(scoreLabel,goodJob, quit);
 
             Scene scene = new Scene(endingBox, 720, 480);
             endingStage.setResizable(false);
