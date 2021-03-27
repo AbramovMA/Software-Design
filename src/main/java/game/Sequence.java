@@ -1,5 +1,6 @@
 package game;
 
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -59,11 +60,11 @@ public class Sequence {
         return updateSequence;
 
     }
-
+    public void getGameOver(){};
     //this function announces game over
-    public void getGameOver(Text badJob, Button quit){
+    public void getGameOver(Button quit){
         Stage endingStage = new Stage();
-        badJob = new Text("Game Over!");
+        Text badJob = new Text("Game Over!");
 
         badJob.setStroke(Color.RED);
         badJob.setStyle("-fx-font: 50 arial");
@@ -81,9 +82,9 @@ public class Sequence {
     }
 
     //this function announces that player won
-    public void getWinner(Text goodJob, Button quit){
+    public void getWinner(Button quit){
         Stage endingStage = new Stage();
-        goodJob = new Text("You're a Winner!");
+        Text goodJob = new Text("You're a Winner!");
 
         goodJob.setStroke(Color.GREEN);
         goodJob.setStyle("-fx-font: 50 arial");
@@ -126,6 +127,12 @@ public class Sequence {
         }
 
     }
+//    @Override
+//    public void handle(ActionEvent actionEvent){
+//        if(ActionEvent.getSource() == quit){
+//            System.exit(0);
+//        }
+//    }
 
 }
 

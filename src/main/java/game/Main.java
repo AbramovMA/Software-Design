@@ -37,8 +37,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     Matrix matrix;
 
-    Text goodJob;
-    Text badJob;
+//    Text goodJob;
+//    Text badJob;
 
     Puzzles ourPuzzle;
     Buffer buffer;
@@ -128,14 +128,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         if(passSeq == 2){  //Winner Winner, Chicken Dinner
             System.out.println(passSeq + ": Winner");
-            currSeq.getWinner(goodJob, quit);
+            currSeq.getWinner(quit);
             //primaryStage.close();
         }
 
         if(passSeq == 3){ //Game Over
             // gameOver is there in case timer runs out and you can set it as gameOver = true
             System.out.println(passSeq + ": Game Over");
-            currSeq.getGameOver(badJob,quit);
+            currSeq.getGameOver(quit);
             //primaryStage.close();
         }
         if(passSeq == 1){ // this is to pass to the next sequence
