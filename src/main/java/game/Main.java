@@ -48,6 +48,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     //boolean victory = false;
     //boolean gameOver = false;
     int passSeq = 0;
+
     String[] updateSequence;
 
 

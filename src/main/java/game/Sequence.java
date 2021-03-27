@@ -112,10 +112,10 @@ public class Sequence {
     //I've tried void, String(for testing and it works), TextFlow and Text.
     public void colourfulSequence(String[] sequence, String value, TextFlow colourSequence){
         Text partOfTheSeq;
-        //TextFlow colourSequence;
+        TextFlow colourSequenceNew;
         Text emptySpace;
 
-        colourSequence = new TextFlow();
+        //colourSequenceNew = new TextFlow();
         //This for loop works completely fine
         for(int i = 0; i < sequence.length; i++){
             partOfTheSeq = new Text(sequence[i]);
@@ -126,8 +126,14 @@ public class Sequence {
             }
             colourSequence.getChildren().add(partOfTheSeq);
             colourSequence.getChildren().add(emptySpace);
+//            colourSequenceNew.getChildren().add(partOfTheSeq);
+//            colourSequenceNew.getChildren().add(emptySpace);
         }
+        //colourSequence = colourSequenceNew;
         //return colourSequence;
+
+
+
 //        Text finishedSequence;
 //        //taken from StackOverFlow(conversion to String)
 
