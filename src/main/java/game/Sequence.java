@@ -6,7 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class Sequence {
 
@@ -96,6 +98,47 @@ public class Sequence {
 
         endingStage.setScene(scene);
         endingStage.show();
+    }
+
+    //public void hoverOverValue()
+    /*
+    functions:
+    hover listener
+    get value from the button and highlight the sequence for the test
+    the text editor: TextFlow and text. Each text is going to be added to the TextFlow and
+    each text will have different color, if the mouse was hovered over that value
+     */
+    public TextFlow colourfulSequence(String[] sequence, String value){
+        Text partOfTheSeq;
+        TextFlow colourSequence;
+        Text emptySpace;
+
+        colourSequence = new TextFlow();
+
+        for(int i = 0; i < sequence.length; i++){
+            partOfTheSeq = new Text(sequence[i]);
+            emptySpace = new Text(" ");
+            partOfTheSeq.setFill(Color.BLACK);
+            if(sequence[i] == value){
+                partOfTheSeq.setFill(Color.RED);
+            }
+            colourSequence.getChildren().add(partOfTheSeq);
+            colourSequence.getChildren().add(emptySpace);
+        }
+        return colourSequence;
+//        Text finishedSequence;
+//        //taken from StackOverFlow
+//        StringBuilder seqString = new StringBuilder();
+//        for(Node node : colourSequence.getChildren()){
+//            if(node instanceof Text){
+//                seqString.append(((Text) node).getText());
+//            }
+//        }
+//        String stringSeq = seqString.toString();
+//        System.out.println("New String: " + stringSeq);
+//        //return stringSeq;
+//        finishedSequence = new Text(stringSeq);
+//        return finishedSequence;
     }
 
 }

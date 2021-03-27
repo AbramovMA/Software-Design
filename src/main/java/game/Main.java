@@ -1,6 +1,6 @@
 package game;
 
-
+import java.applet.Applet;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,9 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
-
+import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -27,6 +28,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     TimerClass time;
     Sequence currSeq;
     Label timerLabel;
+    TextFlow sequenceFlow;
     Text sequence;
     Text input;
     Text buffInfo;
@@ -46,6 +48,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     //boolean victory = false;
     //boolean gameOver = false;
     int passSeq = 0;
+    String[] updateSequence;
+
 
 
 
@@ -69,6 +73,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         quit.setOnAction(this);
 
         sequence = new Text("Press start to show sequence");
+        sequenceFlow = new TextFlow(sequence);
 
         ourPuzzle = new Puzzles();
         ourPuzzle.puzzleGenerator();
@@ -87,6 +92,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
+        sequenceFlow.setTextAlignment(TextAlignment.CENTER);
         root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit,buffer.contents);
         Scene scene = new Scene(root, 720, 480);
 
@@ -118,21 +124,33 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         if(passSeq == 2){  //Winner Winner, Chicken Dinner
             System.out.println(passSeq + ": Winner");
             currSeq.getWinner(goodJob, quit);
+            //primaryStage.close();
         }
 
-        if(passSeq == 3){
+        if(passSeq == 3){ //Game Over
             // gameOver is there in case timer runs out and you can set it as gameOver = true
             System.out.println(passSeq + ": Game Over");
             currSeq.getGameOver(badJob,quit);
+            //primaryStage.close();
         }
         if(passSeq == 1){ // this is to pass to the next sequence
             System.out.println(passSeq + ": next one.");
             iSeq++;
-            String[] updateSequence;
 
+            //visuals
             updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
-            stringedSeq = String.join(" ", updateSequence);
-            sequence.setText(stringedSeq);
+            System.out.println("Updated: " + updateSequence);
+
+
+//            String something = currSeq.colourfulSequence(updateSequence, "E9");
+//            sequence.setText(something);
+            sequenceFlow = new TextFlow(currSeq.colourfulSequence(updateSequence, "E9"));
+//            System.out.println(nom);
+//            sequence.setText(nom.getText());
+
+            //updateSequence[1].setColor(Color.YELLOWGREEN);
+//            stringedSeq = String.join(" ", updateSequence);
+//            sequence.setText(stringedSeq);
         }
         // here is nothing
 
@@ -147,5 +165,24 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             new timeThread(time.getStartTime());
             start.setVisible(false);
         }
+        /*
+        if(actionEvent.getSource() == hover){
+            if(iSeq > 0){
+                //String hoho = matrix.get_selected_value();
+                // get value from the matrix thing
+                //hover highlight is Text  with hoho,
+                //hover highlight function with updateSequence
+                This String/Text = currSeq.colourfulSequence(updateSequence, hoho);
+                // sequence.setText(highlightedSequence);
+
+            }
+            else{
+                //String hoho = matrix.get_selected_value();
+                //hover highlight function with ourPuzzle.pickedSequence
+                This String/Text = currSeq.colourfulSequence(ourPuzzle.pickedSequence, hoho);
+            }
+        }
+
+         */
     }
 }
