@@ -19,12 +19,14 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.awt.event.MouseEvent;
 import java.util.*;
 
 
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int matrix_size = 6;
 
+    //HoverEffect hover;
     TimerClass time;
     Sequence currSeq;
     Label timerLabel;
@@ -150,6 +152,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 //            sequence.setText(something);
             //sequenceFlow = new TextFlow(currSeq.colourfulSequence(updateSequence, "E9"));
             currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
+
 //            System.out.println(nom);
 //            sequence.setText(nom.getText());
             //////End of TEST is here
@@ -172,6 +175,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             new timeThread(time.getStartTime());
             start.setVisible(false);
         }
+//        if(mouseEvent == hover){
+//
+//        }
         /*
         if(actionEvent.getSource() == hover){
             if(iSeq > 0){
@@ -179,14 +185,17 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 // get value from the matrix thing
                 //hover highlight is Text  with hoho,
                 //hover highlight function with updateSequence
-                This String/Text = currSeq.colourfulSequence(updateSequence, hoho);
+                //This String/Text = currSeq.colourfulSequence(updateSequence, hoho);
                 // sequence.setText(highlightedSequence);
+                currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
+
 
             }
             else{
                 //String hoho = matrix.get_selected_value();
                 //hover highlight function with ourPuzzle.pickedSequence
-                This String/Text = currSeq.colourfulSequence(ourPuzzle.pickedSequence, hoho);
+                 currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
+
             }
         }
 

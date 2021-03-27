@@ -24,7 +24,7 @@ public class Sequence {
                 pass = 2; // success
             }
             else{
-                if(buffer.is_full()){
+                if(buffer.is_full()){//THIS IS OUT OF MEMORY, MAXIM
                     pass = 3; // we trigger Game Over
                     // this is when the game should end, cause he didn't pass the last
                     // value of the sequence
@@ -35,7 +35,7 @@ public class Sequence {
             }
         }
         else{
-            if(buffer.is_full()){
+            if(buffer.is_full()){//THIS IS OUT OF MEMORY TOO, MAXIM
                 pass = 3;
 
             }
@@ -112,11 +112,8 @@ public class Sequence {
     //I've tried void, String(for testing and it works), TextFlow and Text.
     public void colourfulSequence(String[] sequence, String value, TextFlow colourSequence){
         Text partOfTheSeq;
-        TextFlow colourSequenceNew;
         Text emptySpace;
-
-        //colourSequenceNew = new TextFlow();
-        //This for loop works completely fine
+        colourSequence.getChildren().clear();
         for(int i = 0; i < sequence.length; i++){
             partOfTheSeq = new Text(sequence[i]);
             emptySpace = new Text(" ");
@@ -126,28 +123,9 @@ public class Sequence {
             }
             colourSequence.getChildren().add(partOfTheSeq);
             colourSequence.getChildren().add(emptySpace);
-//            colourSequenceNew.getChildren().add(partOfTheSeq);
-//            colourSequenceNew.getChildren().add(emptySpace);
         }
-        //colourSequence = colourSequenceNew;
-        //return colourSequence;
 
-
-
-//        Text finishedSequence;
-//        //taken from StackOverFlow(conversion to String)
-
-//        StringBuilder seqString = new StringBuilder();
-//        for(Node node : colourSequence.getChildren()){
-//            if(node instanceof Text){
-//                seqString.append(((Text) node).getText());
-//            }
-//        }
-//        String stringSeq = seqString.toString();
-//        System.out.println("New String: " + stringSeq);
-//        //return stringSeq;
-//        finishedSequence = new Text(stringSeq);
-//        return finishedSequence;
     }
 
 }
+

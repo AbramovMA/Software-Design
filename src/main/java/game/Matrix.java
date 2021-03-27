@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.Optional;
 
 final public class Matrix {
@@ -108,3 +109,7 @@ final public class Matrix {
             return Optional.empty();
     }
 }
+
+/*
+    buttongrid.addMouseListener(n
+ */
