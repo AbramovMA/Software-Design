@@ -108,13 +108,15 @@ public class Sequence {
     the text editor: TextFlow and text. Each text is going to be added to the TextFlow and
     each text will have different color, if the mouse was hovered over that value
      */
-    public TextFlow colourfulSequence(String[] sequence, String value){
+
+    //I've tried void, String(for testing and it works), TextFlow and Text.
+    public void colourfulSequence(String[] sequence, String value, TextFlow colourSequence){
         Text partOfTheSeq;
-        TextFlow colourSequence;
+        //TextFlow colourSequence;
         Text emptySpace;
 
         colourSequence = new TextFlow();
-
+        //This for loop works completely fine
         for(int i = 0; i < sequence.length; i++){
             partOfTheSeq = new Text(sequence[i]);
             emptySpace = new Text(" ");
@@ -125,9 +127,10 @@ public class Sequence {
             colourSequence.getChildren().add(partOfTheSeq);
             colourSequence.getChildren().add(emptySpace);
         }
-        return colourSequence;
+        //return colourSequence;
 //        Text finishedSequence;
-//        //taken from StackOverFlow
+//        //taken from StackOverFlow(conversion to String)
+
 //        StringBuilder seqString = new StringBuilder();
 //        for(Node node : colourSequence.getChildren()){
 //            if(node instanceof Text){

@@ -72,6 +72,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         quit = new Button("Quit");
         quit.setOnAction(this);
 
+        //TextFlow initialisation
         sequence = new Text("Press start to show sequence");
         sequenceFlow = new TextFlow(sequence);
 
@@ -92,8 +93,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
+        //It didn't want to be centered
         sequenceFlow.setTextAlignment(TextAlignment.CENTER);
-        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit,buffer.contents);
+        root.getChildren().addAll(start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -138,17 +140,21 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             iSeq++;
 
             //visuals
+            //this is a value removal, that works (was before I decided to make hover highlighter)
             updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
             System.out.println("Updated: " + updateSequence);
 
-
+                //////TESTING HIGHLIGHT
 //            String something = currSeq.colourfulSequence(updateSequence, "E9");
 //            sequence.setText(something);
-            sequenceFlow = new TextFlow(currSeq.colourfulSequence(updateSequence, "E9"));
+            //sequenceFlow = new TextFlow(currSeq.colourfulSequence(updateSequence, "E9"));
+            currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
 //            System.out.println(nom);
 //            sequence.setText(nom.getText());
+            //////End of TEST is here
 
             //updateSequence[1].setColor(Color.YELLOWGREEN);
+
 //            stringedSeq = String.join(" ", updateSequence);
 //            sequence.setText(stringedSeq);
         }
