@@ -47,6 +47,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     //boolean gameOver = false;
     int passSeq = 0;
 
+    VBox root;
+
+    boolean goal_reachable = true;
+
     public void getGameOver(){
         Stage endingStage = new Stage();
         badJob = new Text("Game Over!");
@@ -102,7 +106,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         SubScene matrixScene = new SubScene(base, 250, 250);
         SubScene othersScene = new SubScene(quit, 50, 25);
 
-        VBox root = new VBox();
+        root = new VBox();
         root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit,buffer.contents);
         Scene scene = new Scene(root, 720, 480);
@@ -126,6 +130,13 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             String value = selected_matrix_value.get();
 
             buffer.add_value(value);
+
+            if (goal_reachable) // test if game over is inevitable
+                if (buffer.unreachable(ourPuzzle.pickedSequence)) {
+                    goal_reachable = false;
+                    root.getChildren().add(new Text("You bad!"));
+                }
+
             passSeq = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
                     buffer, passSeq);
         }
