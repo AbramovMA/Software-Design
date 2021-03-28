@@ -14,42 +14,47 @@ import javafx.scene.Node;
 public class Sequence {
 
 
-    //This function decides if the player progresses in the game
-    public int sequenceProgression(int i, String[] sequence, String input,
-                                       Buffer buffer, int pass){
-    // 0- nothing, 1 - pass, 2 - success, 3 - fail
-        String[] currentSequence = new String[sequence.length];
+    String[] sequence;
+    TextFlow colourSequence;
+    public enum SequencePassState{nothing, pass, winner, loser};
+
+    public SequencePassState sequenceProgression(int i, String[] sequence, String input,
+                                       Buffer buffer){
+        SequencePassState state;
+        String[] currentSequence;
         currentSequence = sequence;
         if(i == (sequence.length - 1)){
-            if(input == currentSequence[i]){
-                pass = 2; // success
+            if(input == currentSequence[i]){//Winner
+                state = SequencePassState.winner;
             }
             else{
-                if(buffer.is_full()){//THIS IS OUT OF MEMORY, MAXIM
-                    pass = 3; // we trigger Game Over
+
+                if(buffer.is_full()){//Game Over
+                    state = SequencePassState.loser;
                     // this is when the game should end, cause he didn't pass the last
                     // value of the sequence
                 }
                 else{
-                    pass = 0; // nothing
+                    state = SequencePassState.nothing; // nothing
                 }
             }
         }
         else{
-            if(buffer.is_full()){//THIS IS OUT OF MEMORY TOO, MAXIM
-                pass = 3;
+
+            if(buffer.is_full()){//Game Over
+                state = SequencePassState.loser;
 
             }
             else if(input == currentSequence[i]){
-                //i++;
-                pass = 1; // pass
+                state = SequencePassState.pass; // pass
 
             }
             else{
-                pass = 0; //nothing really. Player has to chose another one
+
+                state = SequencePassState.nothing; //nothing really. Player has to chose another one
             }
         }
-        return pass;
+        return state;
     }
 
     public String[] arrayRemove(String[] sequence, int count){
@@ -101,17 +106,8 @@ public class Sequence {
         endingStage.show();
     }
 
-    //public void hoverOverValue()
-    /*
-    functions:
-    hover listener
-    get value from the button and highlight the sequence for the test
-    the text editor: TextFlow and text. Each text is going to be added to the TextFlow and
-    each text will have different color, if the mouse was hovered over that value
-     */
 
-    //I've tried void, String(for testing and it works), TextFlow and Text.
-    public void colourfulSequence(String[] sequence, String value, TextFlow colourSequence){
+    public void colourfulSequence(String value){
         Text partOfTheSeq;
         Text emptySpace;
         colourSequence.getChildren().clear();
@@ -127,7 +123,7 @@ public class Sequence {
         }
 
     }
-    public void uncolourfulSequence(String[] sequence, String value, TextFlow colourSequence){
+    public void uncolourfulSequence(String value){
         Text partOfTheSeq;
         Text emptySpace;
         colourSequence.getChildren().clear();

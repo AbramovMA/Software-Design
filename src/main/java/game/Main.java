@@ -5,13 +5,13 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
@@ -23,19 +23,27 @@ import javafx.scene.text.Font;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-
+import java.io.File;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.util.*;
 
 
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int matrix_size = 6;
+    private Stage stage;
 
     //HoverEffect hover;
     TimerClass time;
     Sequence currSeq;
     Label timerLabel;
     TextFlow sequenceFlow;
+
+
+    Score score;
+    Label scoreLabel;
+
+
     Text sequence;
     Text input;
     Text buffInfo;
@@ -43,22 +51,28 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Matrix matrix;
 
 //    Text goodJob;
-//    Text badJob;
 
+    Text badJob;
+
+    FileChooser fileChooser;
+    CustomPuzzle custom;
     Puzzles ourPuzzle;
     Buffer buffer;
 
     Button start;
     Button quit;
+    Button openButton;
 
     Boolean started = false;
 
     int iSeq = 0;
+
     //boolean victory = false;
     //boolean gameOver = false;
-    int passSeq = 0;
+    Sequence.SequencePassState seqState = Sequence.SequencePassState.nothing;
 
-    String[] updateSequence;
+    VBox root;
+
 
     VBox ingame;
     VBox timeUp;
@@ -68,6 +82,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Timeline initTimeLine;
 
 
+
+    boolean goal_reachable = true;
+    String[] updateSequence;
+
+    public void getGameOver() {
+        Stage endingStage = new Stage();
+        badJob = new Text("Game Over!");
+
+
+        VBox endingBox = new VBox();
+        endingBox.setAlignment(Pos.CENTER);
+        endingBox.getChildren().addAll(scoreLabel, badJob, quit);
+    }
 
 
     @Override
@@ -89,11 +116,25 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public VBox ingameScene(){
         VBox scene = new VBox();
 
+        this.stage = primaryStage;
+
         GridPane base = new GridPane();
+
+        score = new Score();
 
         currSeq = new Sequence();
 
         time = new TimerClass();
+
+        fileChooser = new FileChooser();
+        fileChooser.setTitle("Open");
+
+        openButton = new Button("Open");
+        openButton.setOnAction(this);
+
+        scoreLabel = new Label(Integer.toString(score.score));
+        scoreLabel.setTextFill(Color.YELLOWGREEN);
+        scoreLabel.setFont(Font.font(25));
 
         timerLabel = new Label(Integer.toString(time.getStartTime()));
         timerLabel.setTextFill(Color.BLUE);
@@ -110,16 +151,20 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         sequence = new Text("Press start to show sequence");
         sequenceFlow = new TextFlow(sequence);
 
+
+        custom = new CustomPuzzle();
+
         ourPuzzle = new Puzzles();
         ourPuzzle.puzzleGenerator();
+        currSeq.sequence = ourPuzzle.pickedSequence;
+        currSeq.colourSequence = sequenceFlow;
 
         buffer = new Buffer(ourPuzzle.buffSize);
-
 
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
 
-        matrix = new Matrix(matrix_size, base, this);
+        matrix = new Matrix(matrix_size, base, this, currSeq);
         matrix.set_values(ourPuzzle.pickedMatrix);
 
         SubScene matrixScene = new SubScene(base, 250, 250);
@@ -128,7 +173,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         scene.setAlignment(Pos.CENTER);
         //It didn't want to be centered
         sequenceFlow.setTextAlignment(TextAlignment.CENTER);
-        scene.getChildren().addAll(start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
+        scene.getChildren().addAll(openButton,scoreLabel,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
 
         return scene;
     }
@@ -158,6 +203,17 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         launch(args);
     }
 
+    private static void configureFileChooser(
+            final FileChooser fileChooser) {
+        fileChooser.setTitle("Select Your Puzzle TXT");
+        fileChooser.setInitialDirectory(
+                new File(System.getProperty("user.home"))
+        );
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text file", "*.txt")
+        );
+    }
+
     @Override
     public void handle(ActionEvent actionEvent) {
         //String[] updatedSequence = ourPuzzle.pickedSequence; //this is for visuals
@@ -165,29 +221,38 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
         Optional<String> selected_matrix_value = matrix.get_selected_value(actionEvent);
+
+
         if (selected_matrix_value.isPresent()){
             String value = selected_matrix_value.get();
 
             buffer.add_value(value);
-            passSeq = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
-                    buffer, passSeq);
+            if (goal_reachable) // test if game over is inevitable
+                if (buffer.unreachable(ourPuzzle.pickedSequence)) {
+                    goal_reachable = false;
+                    root.getChildren().add(new Text("You bad!"));
+                }
+            seqState = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
+                    buffer);          
         }
 
-        if(passSeq == 2){  //Winner Winner, Chicken Dinner
-            System.out.println(passSeq + ": Winner");
-            currSeq.getWinner(quit);
-            //primaryStage.close();
-        }
 
-        if(passSeq == 3){ //Game Over
-            // gameOver is there in case timer runs out and you can set it as gameOver = true
-            System.out.println(passSeq + ": Game Over");
-            currSeq.getGameOver(quit);
-            //primaryStage.close();
-        }
-        if(passSeq == 1){ // this is to pass to the next sequence
-            System.out.println(passSeq + ": next one.");
-            iSeq++;
+        switch (seqState){
+            case winner:
+                currSeq.getWinner(quit);
+                break;
+
+            case loser:
+                currSeq.getGameOver(quit);
+                break;
+
+            case pass:
+                iSeq++;
+                //visuals
+                updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
+                currSeq.sequence = updateSequence;
+                break;
+
 
             //visuals
             //this is a value removal, that works (was before I decided to make hover highlighter)
@@ -209,8 +274,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 //            stringedSeq = String.join(" ", updateSequence);
 //            sequence.setText(stringedSeq);
         }
-        // here is nothing
-
 
         if (actionEvent.getSource() == quit){
             System.exit(0);
@@ -266,5 +329,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         }
 
          */
+        if (actionEvent.getSource() == openButton){
+            configureFileChooser(fileChooser);
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+                custom.loadPuzzle(file);
+            }
+        }
     }
 }
