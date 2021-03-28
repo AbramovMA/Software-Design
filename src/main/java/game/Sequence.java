@@ -13,6 +13,8 @@ import javafx.scene.Node;
 
 public class Sequence {
 
+    String[] sequence;
+    TextFlow colourSequence;
 
     //This function decides if the player progresses in the game
     public int sequenceProgression(int i, String[] sequence, String input,

@@ -81,6 +81,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         ourPuzzle = new Puzzles();
         ourPuzzle.puzzleGenerator();
+        currSeq.sequence = ourPuzzle.pickedSequence;
+        currSeq.colourSequence = sequenceFlow;
 
         buffer = new Buffer(ourPuzzle.buffSize);
 
@@ -147,6 +149,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             //visuals
             //this is a value removal, that works (was before I decided to make hover highlighter)
             updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
+            currSeq.sequence = updateSequence;
             System.out.println("Updated: " + updateSequence);
 
                 //////TESTING HIGHLIGHT
