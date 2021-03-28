@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,7 +30,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Sequence currSeq;
     Label timerLabel;
     TextFlow sequenceFlow;
-    Text sequence;
+
+    Score score;
+    Label scoreLabel;
+
+
+  Text sequence;
     Text input;
     Text buffInfo;
 
@@ -47,10 +51,25 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button quit;
 
     int iSeq = 0;
+
+    //boolean victory = false;
+    //boolean gameOver = false;
     Sequence.SequencePassState seqState = Sequence.SequencePassState.nothing;
+
+    VBox root;
+
+    boolean goal_reachable = true;
+
+    public void getGameOver(){
+        Stage endingStage = new Stage();
+        badJob = new Text("Game Over!");
 
     String[] updateSequence;
 
+
+        VBox endingBox = new VBox();
+        endingBox.setAlignment(Pos.CENTER);
+        endingBox.getChildren().addAll(scoreLabel,badJob, quit);
 
 
 
@@ -58,9 +77,15 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public void start(Stage primaryStage) {
         GridPane base = new GridPane();
 
+        score = new Score();
+
         currSeq = new Sequence();
 
         time = new TimerClass();
+
+        scoreLabel = new Label(Integer.toString(score.score));
+        scoreLabel.setTextFill(Color.YELLOWGREEN);
+        scoreLabel.setFont(Font.font(25));
 
         timerLabel = new Label(Integer.toString(time.getStartTime()));
         timerLabel.setTextFill(Color.BLUE);
@@ -84,7 +109,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         buffer = new Buffer(ourPuzzle.buffSize);
 
-
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
 
@@ -94,11 +118,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         SubScene matrixScene = new SubScene(base, 250, 250);
         SubScene othersScene = new SubScene(quit, 50, 25);
 
-        VBox root = new VBox();
+        root = new VBox();
         root.setAlignment(Pos.CENTER);
         //It didn't want to be centered
         sequenceFlow.setTextAlignment(TextAlignment.CENTER);
-        root.getChildren().addAll(start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
+        root.getChildren().addAll(scoreLabel,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -122,8 +146,13 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             String value = selected_matrix_value.get();
 
             buffer.add_value(value);
+            if (goal_reachable) // test if game over is inevitable
+                if (buffer.unreachable(ourPuzzle.pickedSequence)) {
+                    goal_reachable = false;
+                    root.getChildren().add(new Text("You bad!"));
+                }
             seqState = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
-                    buffer);
+                    buffer);          
         }
 
         switch (seqState){
@@ -141,6 +170,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
                 currSeq.sequence = updateSequence;
                 break;
+
 
         }
 

@@ -16,6 +16,7 @@ final public class Matrix{
     public final Button[][] button_grid;
     private final int size;
     private Orientation orientation;
+    private final boolean[][] was_selected;
 
     private enum Orientation {
         horizontal, vertical;
@@ -34,9 +35,11 @@ final public class Matrix{
      **/
     Matrix(int new_size, GridPane base, EventHandler<ActionEvent> handler, Sequence seq) {
         // set default values
-        size = new_size;
-        button_grid = new Button[new_size][new_size];
-        orientation = Orientation.horizontal;
+
+        size         = new_size;
+        button_grid  = new Button[new_size][new_size];
+        orientation  = Orientation.horizontal;
+        was_selected = new boolean[new_size][new_size];
 
         for (int column = 0; column < size; ++column)
             for (int row = 0; row < size; ++row) {
@@ -47,9 +50,9 @@ final public class Matrix{
                 int finalRow = row;
                 button_grid[column][row].setOnMouseEntered(e -> {seq.colourfulSequence  (button_grid[finalColumn][finalRow].getText());});
                 button_grid[column][row].setOnMouseExited (e -> {seq.uncolourfulSequence(button_grid[finalColumn][finalRow].getText());});
+                button_grid[column][row].setDisable(row > 0);
+                was_selected[column][row] = false;
             }
-
-        update_availability(0, 0); // create the initial set of available tiles
     }
 
     /**
@@ -65,25 +68,25 @@ final public class Matrix{
      * Updates the buttons such that the user cannot press
      * the buttons which are not available to them
      **/
-    private void update_availability(int selected_column, int selected_row) {
+
+    private void update_availability(int selected_column, int selected_row){
+        was_selected[selected_column][selected_row] = true;
+        button_grid[selected_column][selected_row].setStyle("-fx-background-color: #00ffff");
+        orientation = orientation.opposite();
+
         for (int column = 0; column < size; column++)
             for (int row = 0; row < size; row++) {
-                //button_grid[column][row].setStyle("-fx-background-color: #ff0000");
                 button_grid[column][row].setDisable(true);
             }
 
         if (orientation == Orientation.horizontal)
             for (int column = 0; column < size; column++) {
-                //button_grid[column][selected_row].setStyle("-fx-background-color: #00ff00");
-                button_grid[column][selected_row].setDisable(false);
+                button_grid[column][selected_row].setDisable(was_selected[column][selected_row]);
             }
         else
             for (int row = 0; row < size; row++) {
-                //button_grid[selected_column][row].setStyle("-fx-background-color: #00ff00");
-                button_grid[selected_column][row].setDisable(false);
+                button_grid[selected_column][row].setDisable(was_selected[selected_column][row]);
             }
-
-        orientation = orientation.opposite();
     }
 
     /**
