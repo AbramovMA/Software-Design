@@ -33,7 +33,6 @@ final public class Matrix {
         size        = new_size;
         button_grid = new Button[new_size][new_size];
         orientation = Orientation.horizontal;
-
         for (int column = 0; column < size; ++column)
             for (int row = 0; row < size; ++row) {
                 button_grid[column][row] = new Button();
