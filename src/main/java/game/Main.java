@@ -46,7 +46,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Matrix matrix;
 
 //    Text goodJob;
-//    Text badJob;
+    Text badJob;
 
     FileChooser fileChooser;
     CustomPuzzle custom;
@@ -66,18 +66,17 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     VBox root;
 
     boolean goal_reachable = true;
+    String[] updateSequence;
 
-    public void getGameOver(){
+    public void getGameOver() {
         Stage endingStage = new Stage();
         badJob = new Text("Game Over!");
-
-    String[] updateSequence;
 
 
         VBox endingBox = new VBox();
         endingBox.setAlignment(Pos.CENTER);
-        endingBox.getChildren().addAll(scoreLabel,badJob, quit);
-
+        endingBox.getChildren().addAll(scoreLabel, badJob, quit);
+    }
 
 
     @Override
