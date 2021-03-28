@@ -4,14 +4,16 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class Sequence {
+public class Sequence extends Main {
 
 
     String[] sequence;
@@ -87,7 +89,11 @@ public class Sequence {
     }
 
     //this function announces that player won
-    public void getWinner(Button quit){
+    public void getWinner(Button quit,int score){
+        scoreLabel = new Label("SCORE: " + Integer.toString(score));
+        scoreLabel.setTextFill(Color.YELLOWGREEN);
+        scoreLabel.setFont(Font.font(40));
+
         Stage endingStage = new Stage();
         Text goodJob = new Text("You're a Winner!");
 
@@ -96,7 +102,7 @@ public class Sequence {
 
         VBox endingBox = new VBox();
         endingBox.setAlignment(Pos.CENTER);
-        endingBox.getChildren().addAll(goodJob, quit);
+        endingBox.getChildren().addAll(scoreLabel,goodJob, quit);
 
         Scene scene = new Scene(endingBox, 720, 480);
         endingStage.setResizable(false);

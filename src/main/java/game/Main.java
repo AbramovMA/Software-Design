@@ -39,8 +39,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Label timerLabel;
     TextFlow sequenceFlow;
 
-
-    Score score;
     Label scoreLabel;
 
 
@@ -64,12 +62,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button quit2;
     Button openButton;
 
-    Boolean started = false;
-
     int iSeq = 0;
 
-    //boolean victory = false;
-    //boolean gameOver = false;
     Sequence.SequencePassState seqState = Sequence.SequencePassState.nothing;
 
     //VBox root;
@@ -107,7 +101,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         initTimeLine = new Timeline();
 
-        Scene scene = new Scene(root, 900, 600);
+        Scene scene = new Scene(root, 600, 600);
         primaryStage.setResizable(false);
         primaryStage.setTitle("Cyberpunk Breach");
         primaryStage.setScene(scene);
@@ -118,11 +112,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public VBox ingameScene(){
         VBox scene = new VBox();
 
-
-
         GridPane base = new GridPane();
-
-        score = new Score();
 
         currSeq = new Sequence();
 
@@ -133,10 +123,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         openButton = new Button("Open");
         openButton.setOnAction(this);
-
-        scoreLabel = new Label(Integer.toString(score.score));
-        scoreLabel.setTextFill(Color.YELLOWGREEN);
-        scoreLabel.setFont(Font.font(25));
 
         timerLabel = new Label(Integer.toString(time.getStartTime()));
         timerLabel.setTextFill(Color.BLUE);
@@ -175,7 +161,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         scene.setAlignment(Pos.CENTER);
         //It didn't want to be centered
         sequenceFlow.setTextAlignment(TextAlignment.CENTER);
-        scene.getChildren().addAll(openButton,scoreLabel,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,buffer.contents,quit);
+        scene.getChildren().addAll(openButton,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,buffer.contents,quit);
 
         return scene;
     }
@@ -227,7 +213,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         Optional<String> selected_matrix_value = matrix.get_selected_value(actionEvent);
 
-
         if (selected_matrix_value.isPresent()){
             String value = selected_matrix_value.get();
 
@@ -247,7 +232,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         switch (seqState){
             case winner:
-                currSeq.getWinner(quit);
+                currSeq.getWinner(quit,handleScore());
                 break;
 
             case loser:
@@ -297,9 +282,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             Stage startStage = new Stage();
 
             time.handleTime();
-            new timeThread(time.getStartTime());
+
             start.setVisible(false);
-            System.out.println("Hello World outside");
 
             initTimeLine.getKeyFrames().add(new KeyFrame(Duration.seconds(time.getStartTime()),
                     (ActionEvent event) -> {
@@ -317,6 +301,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             startStage.setScene(scene);
             startStage.show();
         }
+
+
 //        if(mouseEvent == hover){
 //
 //        }
@@ -349,4 +335,64 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             }
         }
     }
+
+    int handleScore(){
+        int score = 0;
+
+        int seconds = Integer.parseInt(timerLabel.getText());
+
+        if(seconds > 90) {
+            System.out.println("between 90-100  |  finish time: " + timerLabel.getText());
+            score = 100;
+        }
+
+        if(seconds > 80 && seconds < 90) {
+            System.out.println("between 80-90  |  finish time: " + timerLabel.getText());
+            score = 90;
+        }
+
+        if(seconds > 70 && seconds < 80) {
+            System.out.println("between 70-80  |  finish time: " + timerLabel.getText());
+            score = 80;
+        }
+
+        if(seconds > 60 && seconds < 70) {
+            System.out.println("between 60-70  |  finish time: " + timerLabel.getText());
+            score = 70;
+        }
+
+        if(seconds > 50 && seconds < 60) {
+            System.out.println("between 50-60  |  finish time: " + timerLabel.getText());
+            score = 60;
+        }
+
+        if(seconds > 40 && seconds < 50) {
+            System.out.println("between 40-50  |  finish time: " + timerLabel.getText());
+            score = 50;
+        }
+
+        if(seconds > 30 && seconds < 40) {
+            System.out.println("between 30-40  |  finish time: " + timerLabel.getText());
+            score = 40;
+        }
+
+        if(seconds > 20 && seconds < 30) {
+            System.out.println("between 20-30  |  finish time: " + timerLabel.getText());
+            score = 30;
+        }
+
+        if(seconds > 10 && seconds < 20) {
+            System.out.println("between 10-20  |  finish time: " + timerLabel.getText());
+            score = 20;
+        }
+
+        if(seconds > 0 && seconds < 10) {
+            System.out.println("between 0-10  |  finish time: " + timerLabel.getText());
+            score = 10;
+        }
+
+        System.out.println("score : " + score);
+        return score;
+    }
+
 }
