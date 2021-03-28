@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
@@ -17,6 +18,8 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+
+import java.io.File;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -24,6 +27,7 @@ import java.util.*;
 
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int matrix_size = 6;
+    private Stage stage;
 
     //HoverEffect hover;
     TimerClass time;
@@ -44,11 +48,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 //    Text goodJob;
 //    Text badJob;
 
+    FileChooser fileChooser;
+    CustomPuzzle custom;
     Puzzles ourPuzzle;
     Buffer buffer;
 
     Button start;
     Button quit;
+    Button openButton;
 
     int iSeq = 0;
 
@@ -75,6 +82,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void start(Stage primaryStage) {
+
+        this.stage = primaryStage;
+
         GridPane base = new GridPane();
 
         score = new Score();
@@ -82,6 +92,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         currSeq = new Sequence();
 
         time = new TimerClass();
+
+        fileChooser = new FileChooser();
+        fileChooser.setTitle("Open");
+
+        openButton = new Button("Open");
+        openButton.setOnAction(this);
 
         scoreLabel = new Label(Integer.toString(score.score));
         scoreLabel.setTextFill(Color.YELLOWGREEN);
@@ -101,6 +117,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         //TextFlow initialisation
         sequence = new Text("Press start to show sequence");
         sequenceFlow = new TextFlow(sequence);
+
+        custom = new CustomPuzzle();
 
         ourPuzzle = new Puzzles();
         ourPuzzle.puzzleGenerator();
@@ -122,7 +140,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         root.setAlignment(Pos.CENTER);
         //It didn't want to be centered
         sequenceFlow.setTextAlignment(TextAlignment.CENTER);
-        root.getChildren().addAll(scoreLabel,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
+        root.getChildren().addAll(openButton,scoreLabel,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -133,6 +151,17 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private static void configureFileChooser(
+            final FileChooser fileChooser) {
+        fileChooser.setTitle("Select Your Puzzle TXT");
+        fileChooser.setInitialDirectory(
+                new File(System.getProperty("user.home"))
+        );
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text file", "*.txt")
+        );
     }
 
     @Override
@@ -183,6 +212,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             time.handleTime();
             new timeThread(time.getStartTime());
             start.setVisible(false);
+        }
+
+        if (actionEvent.getSource() == openButton){
+            configureFileChooser(fileChooser);
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+                custom.loadPuzzle(file);
+            }
         }
     }
 }

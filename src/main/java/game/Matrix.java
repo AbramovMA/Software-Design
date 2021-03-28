@@ -35,7 +35,6 @@ final public class Matrix{
      **/
     Matrix(int new_size, GridPane base, EventHandler<ActionEvent> handler, Sequence seq) {
         // set default values
-
         size         = new_size;
         button_grid  = new Button[new_size][new_size];
         orientation  = Orientation.horizontal;
