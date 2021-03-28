@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,12 +23,13 @@ import java.util.*;
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int matrix_size = 6;
 
+
     Score score;
     Label scoreLabel;
 
-    TimerClass time;
+    public TimerClass time;
     Sequence currSeq;
-    Label timerLabel;
+    public Label timerLabel;
     Text sequence;
     Text input;
     Text buffInfo;
@@ -79,7 +79,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         time = new TimerClass();
 
-        scoreLabel = new Label(Integer.toString(score.getScore()));
+        scoreLabel = new Label(Integer.toString(score.score));
         scoreLabel.setTextFill(Color.YELLOWGREEN);
         scoreLabel.setFont(Font.font(25));
 
@@ -100,7 +100,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         ourPuzzle.puzzleGenerator();
 
         buffer = new Buffer(ourPuzzle.buffSize);
-
 
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
@@ -140,6 +139,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         }
 
         if(passSeq == 2){  //Winner Winner, Chicken Dinner
+            System.out.println(timerLabel.getText());
+            score.printScore();
+
             System.out.println(passSeq + ": Winner");
             System.out.println(score.getScore());
             Stage endingStage = new Stage();
@@ -168,6 +170,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         }
         if(passSeq == 1){ // this is to pass to the next sequence
+//            score.handleScore();
+            score.testMethod();
             System.out.println(passSeq + ": next one.");
             iSeq++;
             //need to add some visuals, so player could see, on which part
