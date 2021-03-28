@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,9 +23,13 @@ import java.util.*;
 public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int matrix_size = 6;
 
-    TimerClass time;
+
+    Score score;
+    Label scoreLabel;
+
+    public TimerClass time;
     Sequence currSeq;
-    Label timerLabel;
+    public Label timerLabel;
     Text sequence;
     Text input;
     Text buffInfo;
@@ -60,7 +63,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox endingBox = new VBox();
         endingBox.setAlignment(Pos.CENTER);
-        endingBox.getChildren().addAll(badJob, quit);
+        endingBox.getChildren().addAll(scoreLabel,badJob, quit);
 
         Scene scene = new Scene(endingBox, 720, 480);
         endingStage.setResizable(false);
@@ -74,9 +77,15 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     public void start(Stage primaryStage) {
         GridPane base = new GridPane();
 
+        score = new Score();
+
         currSeq = new Sequence();
 
         time = new TimerClass();
+
+        scoreLabel = new Label(Integer.toString(score.score));
+        scoreLabel.setTextFill(Color.YELLOWGREEN);
+        scoreLabel.setFont(Font.font(25));
 
         timerLabel = new Label(Integer.toString(time.getStartTime()));
         timerLabel.setTextFill(Color.BLUE);
@@ -96,7 +105,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         buffer = new Buffer(ourPuzzle.buffSize);
 
-
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
 
@@ -108,7 +116,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         root = new VBox();
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(start,timerLabel,buffInfo,sequence,input,matrixScene,quit,buffer.contents);
+        root.getChildren().addAll(scoreLabel,start,timerLabel,buffInfo,sequence,input,matrixScene,quit,buffer.contents);
         Scene scene = new Scene(root, 720, 480);
 
         primaryStage.setResizable(false);
@@ -142,8 +150,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         }
 
         if(passSeq == 2){  //Winner Winner, Chicken Dinner
-            System.out.println(passSeq + ": Winner");
+            System.out.println(timerLabel.getText());
+            score.printScore();
 
+            System.out.println(passSeq + ": Winner");
+            System.out.println(score.getScore());
             Stage endingStage = new Stage();
             goodJob = new Text("You're a Winner!");
 
@@ -152,7 +163,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
             VBox endingBox = new VBox();
             endingBox.setAlignment(Pos.CENTER);
-            endingBox.getChildren().addAll(goodJob, quit);
+            endingBox.getChildren().addAll(scoreLabel,goodJob, quit);
 
             Scene scene = new Scene(endingBox, 720, 480);
             endingStage.setResizable(false);
@@ -170,6 +181,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         }
         if(passSeq == 1){ // this is to pass to the next sequence
+//            score.handleScore();
+            score.testMethod();
             System.out.println(passSeq + ": next one.");
             iSeq++;
             //need to add some visuals, so player could see, on which part
