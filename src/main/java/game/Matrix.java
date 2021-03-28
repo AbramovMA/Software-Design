@@ -137,48 +137,5 @@ final public class Matrix{
         } else
             return "";
     }
-//    final String HOVERED_BUTTON_STYLE = "-fx-background-color: #ffd700;";
-//
-//    public void mouse_interaction(MouseEvent mouseEvent){
-//    button_grid[1][2].
-//        for(int i = 0; i < size; i++){
-//            for(int j = 0; j < size; j++){
-//                if(mouseEvent.getSource() == button_grid[i][j]){
-//                    final int boi = i;
-//                    final int girl = j;
-//                    button_grid[i][j].setOnMouseEntered(e -> button_grid[boi][girl].setStyle(HOVERED_BUTTON_STYLE));//ColourfulSequence,
-//                }
-//                else{
-//                    final int boi = i;
-//                    final int girl = j;
-//                    button_grid[i][j].setOnMouseExited(e -> button_grid[boi][girl].setStyle());//ColourfulSequence,
-//                }
-//            }
-//        }
-//    }
-/*
-    buttongrid.addMouseListener(new java.awt.event.MouseAdapter() {
-    public void mouseEntered(java.awt.event.MouseEvent evt) {
-          if(iSeq>0)
-          currSeq.colourfulSequence(updateSequence, get_selected_value, sequenceFlow);
-          else{
-                    currSeq.colourfulSequence(ourPuzzle.pickedSequence, get_highlighted_value(evt), sequenceFlow);
-
-
-          }
-    }
-
-    public void mouseExited(java.awt.event.MouseEvent evt) {
-        if(iSeq>0)
-        currSeq.uncolourfulSequence(updateSequence, get_selected_value, sequenceFlow);
-        else{
-                    currSeq.uncolourfulSequence(ourPuzzle.pickedSequence, get_highlighted_value(evt), sequenceFlow);
-
-          }
-
-    }
-});
-
- */
 
 }

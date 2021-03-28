@@ -47,9 +47,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button quit;
 
     int iSeq = 0;
-    //boolean victory = false;
-    //boolean gameOver = false;
-    int passSeq = 0;
+    Sequence.SequencePassState seqState = Sequence.SequencePassState.nothing;
 
     String[] updateSequence;
 
@@ -115,8 +113,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        //tring[] updatedSequence = ourPuzzle.pickedSequence; //this is for visuals
-
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
         Optional<String> selected_matrix_value = matrix.get_selected_value(actionEvent);
@@ -126,49 +122,27 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             String value = selected_matrix_value.get();
 
             buffer.add_value(value);
-            passSeq = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
-                    buffer, passSeq);
+            seqState = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
+                    buffer);
         }
 
-        if(passSeq == 2){  //Winner Winner, Chicken Dinner
-            System.out.println(passSeq + ": Winner");
-            currSeq.getWinner(quit);
-            //primaryStage.close();
+        switch (seqState){
+            case winner:
+                currSeq.getWinner(quit);
+                break;
+
+            case loser:
+                currSeq.getGameOver(quit);
+                break;
+
+            case pass:
+                iSeq++;
+                //visuals
+                updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
+                currSeq.sequence = updateSequence;
+                break;
+
         }
-
-        if(passSeq == 3){ //Game Over
-            // gameOver is there in case timer runs out and you can set it as gameOver = true
-            System.out.println(passSeq + ": Game Over");
-            currSeq.getGameOver(quit);
-            //primaryStage.close();
-        }
-        if(passSeq == 1){ // this is to pass to the next sequence
-            System.out.println(passSeq + ": next one.");
-            iSeq++;
-
-            //visuals
-            //this is a value removal, that works (was before I decided to make hover highlighter)
-            updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
-            currSeq.sequence = updateSequence;
-            System.out.println("Updated: " + updateSequence);
-
-                //////TESTING HIGHLIGHT
-//            String something = currSeq.colourfulSequence(updateSequence, "E9");
-//            sequence.setText(something);
-            //sequenceFlow = new TextFlow(currSeq.colourfulSequence(updateSequence, "E9"));
-            //currSeq.colourfulSequence("E9");
-
-//            System.out.println(nom);
-//            sequence.setText(nom.getText());
-            //////End of TEST is here
-
-            //updateSequence[1].setColor(Color.YELLOWGREEN);
-
-//            stringedSeq = String.join(" ", updateSequence);
-//            sequence.setText(stringedSeq);
-        }
-        // here is nothing
-
 
         if (actionEvent.getSource() == quit){
             System.exit(0);
@@ -180,30 +154,5 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             new timeThread(time.getStartTime());
             start.setVisible(false);
         }
-//        if(mouseEvent == hover){
-//
-//        }
-        /*
-        if(actionEvent.getSource() == hover){
-            if(iSeq > 0){
-                //String hoho = matrix.get_selected_value();
-                // get value from the matrix thing
-                //hover highlight is Text  with hoho,
-                //hover highlight function with updateSequence
-                //This String/Text = currSeq.colourfulSequence(updateSequence, hoho);
-                // sequence.setText(highlightedSequence);
-                currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
-
-
-            }
-            else{
-                //String hoho = matrix.get_selected_value();
-                //hover highlight function with ourPuzzle.pickedSequence
-                 currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
-
-            }
-        }
-
-         */
     }
 }
