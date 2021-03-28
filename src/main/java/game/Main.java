@@ -90,7 +90,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
 
-        matrix = new Matrix(matrix_size, base, this);
+        matrix = new Matrix(matrix_size, base, this, currSeq);
         matrix.set_values(ourPuzzle.pickedMatrix);
 
         SubScene matrixScene = new SubScene(base, 250, 250);
@@ -156,7 +156,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 //            String something = currSeq.colourfulSequence(updateSequence, "E9");
 //            sequence.setText(something);
             //sequenceFlow = new TextFlow(currSeq.colourfulSequence(updateSequence, "E9"));
-            currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
+            //currSeq.colourfulSequence("E9");
 
 //            System.out.println(nom);
 //            sequence.setText(nom.getText());

@@ -113,7 +113,7 @@ public class Sequence {
      */
 
     //I've tried void, String(for testing and it works), TextFlow and Text.
-    public void colourfulSequence(String[] sequence, String value, TextFlow colourSequence){
+    public void colourfulSequence(String value){
         Text partOfTheSeq;
         Text emptySpace;
         colourSequence.getChildren().clear();
@@ -129,7 +129,7 @@ public class Sequence {
         }
 
     }
-    public void uncolourfulSequence(String[] sequence, String value, TextFlow colourSequence){
+    public void uncolourfulSequence(String value){
         Text partOfTheSeq;
         Text emptySpace;
         colourSequence.getChildren().clear();

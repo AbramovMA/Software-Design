@@ -32,7 +32,7 @@ final public class Matrix{
      * Matrix constructor
      * requires a matrix size, a grid container and a handler for buttons
      **/
-    Matrix(int new_size, GridPane base, EventHandler<ActionEvent> handler) {
+    Matrix(int new_size, GridPane base, EventHandler<ActionEvent> handler, Sequence seq) {
         // set default values
         size = new_size;
         button_grid = new Button[new_size][new_size];
@@ -43,6 +43,10 @@ final public class Matrix{
                 button_grid[column][row] = new Button();
                 base.add(button_grid[column][row], column, row); // add to screen
                 button_grid[column][row].setOnAction(handler);   // add button press detection
+                int finalColumn = column;
+                int finalRow = row;
+                button_grid[column][row].setOnMouseEntered(e -> {seq.colourfulSequence  (button_grid[finalColumn][finalRow].getText());});
+                button_grid[column][row].setOnMouseExited (e -> {seq.uncolourfulSequence(button_grid[finalColumn][finalRow].getText());});
             }
 
         update_availability(0, 0); // create the initial set of available tiles
