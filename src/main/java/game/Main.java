@@ -156,6 +156,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         matrix.set_values(ourPuzzle.pickedMatrix);
 
         SubScene matrixScene = new SubScene(base, 250, 200);
+        ////////////////////matrixScene.setVisible(false);
         //SubScene othersScene = new SubScene(quit, 50, 25);
 
         scene.setAlignment(Pos.CENTER);
@@ -278,6 +279,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
 
         if (actionEvent.getSource() == start){
+            scenes[0].getChildren().get(7).setVisible(true);
             sequence.setText(stringedSeq);
             Stage startStage = new Stage();
 
@@ -332,6 +334,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             File file = fileChooser.showOpenDialog(stage);
             if (file != null) {
                 custom.loadPuzzle(file);
+                matrix.set_values(custom.customMatrix);
+                currSeq.sequence = custom.goalSequence;
+                buffer = new Buffer(currSeq.sequence.length + 3);
+                buffInfo.setText("Buffer size is " + (currSeq.sequence.length + 3) +"!");
+                ingame.getChildren().remove(8);
+                ingame.getChildren().add(8, buffer.contents);
             }
         }
     }
