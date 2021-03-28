@@ -18,7 +18,7 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
+import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.util.*;
 
@@ -118,6 +118,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
         Optional<String> selected_matrix_value = matrix.get_selected_value(actionEvent);
+
+
         if (selected_matrix_value.isPresent()){
             String value = selected_matrix_value.get();
 

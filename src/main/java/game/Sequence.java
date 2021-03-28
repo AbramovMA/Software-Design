@@ -60,7 +60,7 @@ public class Sequence {
         return updateSequence;
 
     }
-    public void getGameOver(){};
+
     //this function announces game over
     public void getGameOver(Button quit){
         Stage endingStage = new Stage();
@@ -122,6 +122,19 @@ public class Sequence {
             if(sequence[i] == value){
                 partOfTheSeq.setFill(Color.RED);
             }
+            colourSequence.getChildren().add(partOfTheSeq);
+            colourSequence.getChildren().add(emptySpace);
+        }
+
+    }
+    public void uncolourfulSequence(String[] sequence, String value, TextFlow colourSequence){
+        Text partOfTheSeq;
+        Text emptySpace;
+        colourSequence.getChildren().clear();
+        for(int i = 0; i < sequence.length; i++){
+            partOfTheSeq = new Text(sequence[i]);
+            emptySpace = new Text(" ");
+            partOfTheSeq.setFill(Color.BLACK);
             colourSequence.getChildren().add(partOfTheSeq);
             colourSequence.getChildren().add(emptySpace);
         }
