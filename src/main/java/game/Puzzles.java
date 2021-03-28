@@ -135,12 +135,11 @@ public class Puzzles {
 
     public void generate_random_game(int matrix_size, int sequence_size){
         String[][] matrix_values = new String[matrix_size][matrix_size];
-        Random kek = new Random();
 
         // generate matrix values
         for (int i = 0; i < matrix_values.length; ++i)
             for (int j = 0; j < matrix_values.length; ++j)
-                matrix_values[i][j] = value_set[kek.nextInt(value_set.length)];
+                matrix_values[i][j] = value_set[rng.nextInt(value_set.length)];
 
         // generate goal sequence
         Vector<String> sequence_values = new Vector<String>();
@@ -150,9 +149,9 @@ public class Puzzles {
         boolean is_x = true;
         while (sequence_values.size() < sequence_size){
             if (is_x)
-                x = kek.nextInt(matrix_size);
+                x = rng.nextInt(matrix_size);
             else
-                y = kek.nextInt(matrix_size);
+                y = rng.nextInt(matrix_size);
             if (!selected_cells.contains(new java.awt.Point(x,y))) {
                 sequence_values.add(matrix_values[x][y]);
                 selected_cells.add(new java.awt.Point(x,y));
@@ -164,6 +163,5 @@ public class Puzzles {
         pickedMatrix = matrix_values;
         sequence_values.toArray(pickedSequence);
     }
-
 
 }
