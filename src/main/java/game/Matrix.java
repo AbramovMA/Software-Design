@@ -6,18 +6,22 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 import java.util.Optional;
 
-final public class Matrix {
-    private final Button[][] button_grid;
+final public class Matrix{
+    public final Button[][] button_grid;
     private final int size;
     private Orientation orientation;
     private final boolean[][] was_selected;
 
-    private enum Orientation{
+    private enum Orientation {
         horizontal, vertical;
 
-        Orientation opposite(){
+        Orientation opposite() {
             if (this == horizontal)
                 return vertical;
             else
@@ -29,8 +33,9 @@ final public class Matrix {
      * Matrix constructor
      * requires a matrix size, a grid container and a handler for buttons
      **/
-    Matrix(int new_size, GridPane base, EventHandler<ActionEvent> handler){
+    Matrix(int new_size, GridPane base, EventHandler<ActionEvent> handler, Sequence seq) {
         // set default values
+
         size         = new_size;
         button_grid  = new Button[new_size][new_size];
         orientation  = Orientation.horizontal;
@@ -41,6 +46,10 @@ final public class Matrix {
                 button_grid[column][row] = new Button();
                 base.add(button_grid[column][row], column, row); // add to screen
                 button_grid[column][row].setOnAction(handler);   // add button press detection
+                int finalColumn = column;
+                int finalRow = row;
+                button_grid[column][row].setOnMouseEntered(e -> {seq.colourfulSequence  (button_grid[finalColumn][finalRow].getText());});
+                button_grid[column][row].setOnMouseExited (e -> {seq.uncolourfulSequence(button_grid[finalColumn][finalRow].getText());});
                 button_grid[column][row].setDisable(row > 0);
                 was_selected[column][row] = false;
             }
@@ -49,7 +58,7 @@ final public class Matrix {
     /**
      * Initializes the text on the buttons from a 2D array of labels of appropriate size
      **/
-    public void set_values(String[][] values){
+    public void set_values(String[][] values) {
         for (int column = 0; column < size; ++column)
             for (int row = 0; row < size; ++row)
                 button_grid[column][row].setText(values[column][row]);
@@ -59,6 +68,7 @@ final public class Matrix {
      * Updates the buttons such that the user cannot press
      * the buttons which are not available to them
      **/
+
     private void update_availability(int selected_column, int selected_row){
         was_selected[selected_column][selected_row] = true;
         button_grid[selected_column][selected_row].setStyle("-fx-background-color: #00ffff");
@@ -83,7 +93,7 @@ final public class Matrix {
      * Returns the coordinates of the button if a button press was registered by `actionEvent`
      * Returns `Optional.empty` otherwise
      **/
-    private Optional<Point> get_selected_position(ActionEvent actionEvent){
+    private Optional<Point> get_selected_position(ActionEvent actionEvent) {
         for (int column = 0; column < size; column++)
             for (int row = 0; row < size; row++)
                 if (actionEvent.getSource() == button_grid[column][row])
@@ -96,16 +106,39 @@ final public class Matrix {
      * Returns the text on the button if a button press was registered by `actionEvent`
      * Returns `Optional.empty` otherwise
      **/
-    public Optional<String> get_selected_value(ActionEvent actionEvent){
+    public Optional<String> get_selected_value(ActionEvent actionEvent) {
         Optional<Point> selected_position = get_selected_position(actionEvent);
-        if (selected_position.isPresent()){
+        if (selected_position.isPresent()) {
             Point position = selected_position.get();
             int selected_column = position.x;
-            int selected_row    = position.y;
+            int selected_row = position.y;
 
             update_availability(selected_column, selected_row);
             return Optional.of(button_grid[selected_column][selected_row].getText());
         } else
             return Optional.empty();
     }
+
+    private Optional<Point> get_highlighted_position(MouseEvent mouseEvent) {
+        for (int column = 0; column < size; column++)
+            for (int row = 0; row < size; row++)
+                if (mouseEvent.getSource() == button_grid[column][row])
+                    return Optional.of(new Point(column, row));
+
+        return Optional.empty();
+    }
+
+    public String get_highlighted_value(MouseEvent mouseEvent) {
+        Optional<Point> selected_position = get_highlighted_position(mouseEvent);
+        if (selected_position.isPresent()) {
+            Point position = selected_position.get();
+            int selected_column = position.x;
+            int selected_row = position.y;
+
+            update_availability(selected_column, selected_row);
+            return button_grid[selected_column][selected_row].getText();
+        } else
+            return "";
+    }
+
 }
