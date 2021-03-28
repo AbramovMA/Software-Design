@@ -9,6 +9,7 @@ import javafx.scene.SubScene;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.scene.text.TextAlignment;
@@ -19,6 +20,9 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import java.io.File;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
@@ -35,17 +39,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Label timerLabel;
     TextFlow sequenceFlow;
 
+
     Score score;
     Label scoreLabel;
 
 
-  Text sequence;
+    Text sequence;
     Text input;
     Text buffInfo;
 
     Matrix matrix;
 
 //    Text goodJob;
+
     Text badJob;
 
     FileChooser fileChooser;
@@ -57,6 +63,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button quit;
     Button openButton;
 
+    Boolean started = false;
+
     int iSeq = 0;
 
     //boolean victory = false;
@@ -64,6 +72,16 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Sequence.SequencePassState seqState = Sequence.SequencePassState.nothing;
 
     VBox root;
+
+
+    VBox ingame;
+    VBox timeUp;
+    VBox[] scenes;
+    StackPane root;
+
+    Timeline initTimeLine;
+
+
 
     boolean goal_reachable = true;
     String[] updateSequence;
@@ -81,6 +99,22 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void start(Stage primaryStage) {
+        ingame = ingameScene();
+        timeUp = timeUpScene();
+        scenes = new VBox[]{ingame, timeUp};
+        root = new StackPane(scenes[0]);
+
+        initTimeLine = new Timeline();
+
+        Scene scene = new Scene(root, 720, 480);
+        primaryStage.setResizable(false);
+        primaryStage.setTitle("Cyberpunk Breach");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public VBox ingameScene(){
+        VBox scene = new VBox();
 
         this.stage = primaryStage;
 
@@ -117,6 +151,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         sequence = new Text("Press start to show sequence");
         sequenceFlow = new TextFlow(sequence);
 
+
         custom = new CustomPuzzle();
 
         ourPuzzle = new Puzzles();
@@ -135,18 +170,34 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         SubScene matrixScene = new SubScene(base, 250, 250);
         SubScene othersScene = new SubScene(quit, 50, 25);
 
-        root = new VBox();
-        root.setAlignment(Pos.CENTER);
+        scene.setAlignment(Pos.CENTER);
         //It didn't want to be centered
         sequenceFlow.setTextAlignment(TextAlignment.CENTER);
-        root.getChildren().addAll(openButton,scoreLabel,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
-        Scene scene = new Scene(root, 720, 480);
+        scene.getChildren().addAll(openButton,scoreLabel,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
 
-        primaryStage.setResizable(false);
-        primaryStage.setTitle("Cyberpunk Breach");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        return scene;
     }
+
+
+    public VBox timeUpScene() {
+
+        VBox scene = new VBox();
+
+        GridPane base = new GridPane();
+
+        Text badJob = new Text("time is up!");
+
+        badJob.setStroke(Color.RED);
+        badJob.setStyle("-fx-font: 50 arial");
+
+        scene.setAlignment(Pos.CENTER);
+        scene.getChildren().addAll(badJob, quit);
+
+
+        return scene;
+    }
+
+
 
     public static void main(String[] args) {
         launch(args);
@@ -165,6 +216,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
+        //String[] updatedSequence = ourPuzzle.pickedSequence; //this is for visuals
+
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
         Optional<String> selected_matrix_value = matrix.get_selected_value(actionEvent);
@@ -183,6 +236,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                     buffer);          
         }
 
+
         switch (seqState){
             case winner:
                 currSeq.getWinner(quit);
@@ -200,19 +254,81 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 break;
 
 
+            //visuals
+            //this is a value removal, that works (was before I decided to make hover highlighter)
+            updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
+            System.out.println("Updated: " + updateSequence);
+
+            //////TESTING HIGHLIGHT
+//            String something = currSeq.colourfulSequence(updateSequence, "E9");
+//            sequence.setText(something);
+            //sequenceFlow = new TextFlow(currSeq.colourfulSequence(updateSequence, "E9"));
+            currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
+
+//            System.out.println(nom);
+//            sequence.setText(nom.getText());
+            //////End of TEST is here
+
+            //updateSequence[1].setColor(Color.YELLOWGREEN);
+
+//            stringedSeq = String.join(" ", updateSequence);
+//            sequence.setText(stringedSeq);
         }
 
         if (actionEvent.getSource() == quit){
             System.exit(0);
         }
 
+
         if (actionEvent.getSource() == start){
             sequence.setText(stringedSeq);
+            Stage startStage = new Stage();
+
             time.handleTime();
             new timeThread(time.getStartTime());
             start.setVisible(false);
+            System.out.println("Hello World outside");
+
+            initTimeLine.getKeyFrames().add(new KeyFrame(Duration.seconds(time.getStartTime()),
+                    (ActionEvent event) -> {
+                        if (root.getChildren().get(0).equals(scenes[0]))//If the first scene is loaded, load the second scene.
+                        {
+                            root.getChildren().set(0, scenes[1]);
+                        }
+                    }));
+
+            initTimeLine.setCycleCount(Timeline.INDEFINITE);
+            initTimeLine.play();
+            Scene scene = new Scene(root, 720, 480);
+            startStage.setResizable(false);
+            startStage.setTitle("Cyberpunk Breach");
+            startStage.setScene(scene);
+            startStage.show();
+        }
+//        if(mouseEvent == hover){
+//
+//        }
+        /*
+        if(actionEvent.getSource() == hover){
+            if(iSeq > 0){
+                //String hoho = matrix.get_selected_value();
+                // get value from the matrix thing
+                //hover highlight is Text  with hoho,
+                //hover highlight function with updateSequence
+                //This String/Text = currSeq.colourfulSequence(updateSequence, hoho);
+                // sequence.setText(highlightedSequence);
+                currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
+
+
+            }
+            else{
+                //String hoho = matrix.get_selected_value();
+                //hover highlight function with ourPuzzle.pickedSequence
+                 currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
+            }
         }
 
+         */
         if (actionEvent.getSource() == openButton){
             configureFileChooser(fileChooser);
             File file = fileChooser.showOpenDialog(stage);

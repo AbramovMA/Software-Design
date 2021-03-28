@@ -33,6 +33,7 @@ final public class Matrix{
      * Matrix constructor
      * requires a matrix size, a grid container and a handler for buttons
      **/
+
     Matrix(int new_size, GridPane base, EventHandler<ActionEvent> handler, Sequence seq) {
         // set default values
         size         = new_size;
@@ -139,5 +140,4 @@ final public class Matrix{
         } else
             return "";
     }
-
 }

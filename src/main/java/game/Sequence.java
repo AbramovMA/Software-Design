@@ -13,6 +13,7 @@ import javafx.scene.Node;
 
 public class Sequence {
 
+
     String[] sequence;
     TextFlow colourSequence;
     public enum SequencePassState{nothing, pass, winner, loser};
@@ -27,6 +28,7 @@ public class Sequence {
                 state = SequencePassState.winner;
             }
             else{
+
                 if(buffer.is_full()){//Game Over
                     state = SequencePassState.loser;
                     // this is when the game should end, cause he didn't pass the last
@@ -38,6 +40,7 @@ public class Sequence {
             }
         }
         else{
+
             if(buffer.is_full()){//Game Over
                 state = SequencePassState.loser;
 
@@ -47,6 +50,7 @@ public class Sequence {
 
             }
             else{
+
                 state = SequencePassState.nothing; //nothing really. Player has to chose another one
             }
         }
@@ -101,6 +105,7 @@ public class Sequence {
         endingStage.setScene(scene);
         endingStage.show();
     }
+
 
     public void colourfulSequence(String value){
         Text partOfTheSeq;

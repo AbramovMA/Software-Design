@@ -16,7 +16,7 @@ public class timeThread extends Main {
         public void run() {
             System.out.println("time is up!");
             timer.cancel(); // Terminate the timer thread
-            System.exit(0);
+//            System.exit(0);
         }
     }
 }
