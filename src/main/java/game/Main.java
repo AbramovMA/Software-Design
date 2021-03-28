@@ -23,6 +23,8 @@ import javafx.scene.text.Font;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+
+import java.awt.*;
 import java.io.File;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
@@ -88,7 +90,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         VBox endingBox = new VBox();
         endingBox.setAlignment(Pos.CENTER);
-        endingBox.getChildren().addAll(scoreLabel, badJob, quit);
+        endingBox.getChildren().addAll(scoreLabel, badJob, quit2);
     }
 
 
@@ -144,7 +146,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         ourPuzzle = new Puzzles();
         ourPuzzle.puzzleGenerator();
-        currSeq.sequence = ourPuzzle.pickedSequence;
+        currSeq.sequenceNew = ourPuzzle.pickedSequence;
         currSeq.colourSequence = sequenceFlow;
 
         buffer = new Buffer(ourPuzzle.buffSize);
@@ -226,8 +228,28 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                     ingame.getChildren().add(kek);
                     //root.setAlignment(Pos.BOTTOM_RIGHT);
                 }
+
             seqState = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
-                    buffer);          
+                    buffer);
+//                String suka = String.join(" ", ourPuzzle.pickedSequence);
+//            System.out.println(suka);
+//                System.out.println(ourPuzzle.pickedSequence[0]+ourPuzzle.pickedSequence[1]);
+            if(seqState == Sequence.SequencePassState.pass){
+                System.out.println("Hello 1");
+            }
+            if(seqState == Sequence.SequencePassState.winner){
+                System.out.println("Hello 2");
+
+            }
+            if(seqState == Sequence.SequencePassState.loser){
+                System.out.println("Hello 3");
+
+            }
+            if(seqState == Sequence.SequencePassState.nothing){
+                System.out.println("Hello 0");
+
+            }
+
         }
 
 
@@ -244,7 +266,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                 iSeq++;
                 //visuals
                 updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
-                currSeq.sequence = updateSequence;
+                currSeq.sequenceNew = updateSequence;
                 break;
 
 
@@ -335,11 +357,13 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             if (file != null) {
                 custom.loadPuzzle(file);
                 matrix.set_values(custom.customMatrix);
-                currSeq.sequence = custom.goalSequence;
-                buffer = new Buffer(currSeq.sequence.length + 3);
-                buffInfo.setText("Buffer size is " + (currSeq.sequence.length + 3) +"!");
-                ingame.getChildren().remove(8);
-                ingame.getChildren().add(8, buffer.contents);
+                currSeq.sequenceNew = custom.goalSequence;
+                ourPuzzle.pickedSequence = Arrays.copyOf(custom.goalSequence, custom.goalSequence.length);
+                buffer = new Buffer(currSeq.sequenceNew.length + 3);
+                buffInfo.setText("Buffer size is " + (currSeq.sequenceNew.length + 3) +"!");
+                ingame.getChildren().remove(7);
+                ingame.getChildren().add(7, buffer.contents);
+
             }
         }
     }

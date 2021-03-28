@@ -16,7 +16,7 @@ import javafx.scene.Node;
 public class Sequence extends Main {
 
 
-    String[] sequence;
+    String[] sequenceNew;
     TextFlow colourSequence;
     public enum SequencePassState{nothing, pass, winner, loser};
 
@@ -25,8 +25,11 @@ public class Sequence extends Main {
         SequencePassState state;
         String[] currentSequence;
         currentSequence = sequence;
+        System.out.println("Hp " + input);
+        String suka = String.join(" ", currentSequence);
+        System.out.println(suka);
         if(i == (sequence.length - 1)){
-            if(input == currentSequence[i]){//Winner
+            if(input.equals(currentSequence[i])){//Winner
                 state = SequencePassState.winner;
             }
             else{
@@ -40,18 +43,22 @@ public class Sequence extends Main {
                     state = SequencePassState.nothing; // nothing
                 }
             }
+            System.out.println("So?");
         }
         else{
+            System.out.println("."+input + ". and ." + currentSequence[i] + ".");
 
             if(buffer.is_full()){//Game Over
                 state = SequencePassState.loser;
 
             }
-            else if(input == currentSequence[i]){
+            else if(input.equals( currentSequence[i])){
+                System.out.println("Oh Boi");
                 state = SequencePassState.pass; // pass
 
             }
             else{
+                System.out.println("Dumbass");
 
                 state = SequencePassState.nothing; //nothing really. Player has to chose another one
             }
@@ -62,7 +69,7 @@ public class Sequence extends Main {
     public String[] arrayRemove(String[] sequence, int count){
         String [] updateSequence = new String[sequence.length - (count)];
         for(int i = 0; i < updateSequence.length; i++){
-            updateSequence[i] = sequence[i+count];
+            updateSequence[i] = (sequence[i+count]);
         }
         return updateSequence;
 
@@ -117,11 +124,11 @@ public class Sequence extends Main {
         Text partOfTheSeq;
         Text emptySpace;
         colourSequence.getChildren().clear();
-        for(int i = 0; i < sequence.length; i++){
-            partOfTheSeq = new Text(sequence[i]);
+        for(int i = 0; i < sequenceNew.length; i++){
+            partOfTheSeq = new Text(sequenceNew[i]);
             emptySpace = new Text(" ");
             partOfTheSeq.setFill(Color.BLACK);
-            if(sequence[i] == value){
+            if(sequenceNew[i].equals(value)){
                 partOfTheSeq.setFill(Color.RED);
             }
             colourSequence.getChildren().add(partOfTheSeq);
@@ -133,8 +140,8 @@ public class Sequence extends Main {
         Text partOfTheSeq;
         Text emptySpace;
         colourSequence.getChildren().clear();
-        for(int i = 0; i < sequence.length; i++){
-            partOfTheSeq = new Text(sequence[i]);
+        for(int i = 0; i < sequenceNew.length; i++){
+            partOfTheSeq = new Text(sequenceNew[i]);
             emptySpace = new Text(" ");
             partOfTheSeq.setFill(Color.BLACK);
             colourSequence.getChildren().add(partOfTheSeq);
