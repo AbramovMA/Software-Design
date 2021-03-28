@@ -50,34 +50,30 @@ final public class Buffer {
     }
 
     /**
-     * Checks if a given `sequence` is contained in the buffer
+     * Checks if a given `sequence` can be constructed by adding more values into the buffer
      * Return value: 1 on success
      *               0 on failure
      **/
-    private boolean contains(String[] sequence){
+    private boolean is_reachable(String[] sequence) {
         int length = sequence.length;
-        for (int i = 0; i < size - length + 1; ++i){
-            boolean found = true;
-            for (int j = 0; j < length; ++j)
-                if (!values[i + j].equals(sequence[j])) {
-                    found = false;
-                    break;
-                }
 
-            if (found)
-                return true;
+        int sequence_index = 0;
+        for (int i = 0; i < size; ++i){
+            if (sequence_index == length)
+                break;
+            if (sequence[sequence_index].equals(values[i]))
+                ++sequence_index;
         }
-        return false;
+
+        int sequence_done = sequence_index;
+        int sequence_left = length - sequence_done;
+        int buffer_left = max_size - size;
+
+        return sequence_left <= buffer_left;
     }
 
-    /**
-     * Checks if the goal sequence is contained in the buffer
-     * Return value: 1 on success
-     *               0 on failure
-     **/
-    final public boolean contains_goal_sequence(){
-        String[] goal = new String[0]; // TODO: change to goal_sequence.get_sequence()
-        return contains(goal);
+    public boolean unreachable(String[] sequence) {
+        return !is_reachable(sequence);
     }
 
     /**
