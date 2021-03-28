@@ -61,6 +61,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     Button start;
     Button quit;
+    Button quit2;
     Button openButton;
 
     Boolean started = false;
@@ -71,7 +72,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     //boolean gameOver = false;
     Sequence.SequencePassState seqState = Sequence.SequencePassState.nothing;
 
-    VBox root;
+    //VBox root;
 
 
     VBox ingame;
@@ -106,17 +107,18 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         initTimeLine = new Timeline();
 
-        Scene scene = new Scene(root, 720, 480);
+        Scene scene = new Scene(root, 900, 600);
         primaryStage.setResizable(false);
         primaryStage.setTitle("Cyberpunk Breach");
         primaryStage.setScene(scene);
         primaryStage.show();
+        this.stage = primaryStage;
     }
 
     public VBox ingameScene(){
         VBox scene = new VBox();
 
-        this.stage = primaryStage;
+
 
         GridPane base = new GridPane();
 
@@ -167,13 +169,13 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         matrix = new Matrix(matrix_size, base, this, currSeq);
         matrix.set_values(ourPuzzle.pickedMatrix);
 
-        SubScene matrixScene = new SubScene(base, 250, 250);
-        SubScene othersScene = new SubScene(quit, 50, 25);
+        SubScene matrixScene = new SubScene(base, 250, 200);
+        //SubScene othersScene = new SubScene(quit, 50, 25);
 
         scene.setAlignment(Pos.CENTER);
         //It didn't want to be centered
         sequenceFlow.setTextAlignment(TextAlignment.CENTER);
-        scene.getChildren().addAll(openButton,scoreLabel,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,quit,buffer.contents);
+        scene.getChildren().addAll(openButton,scoreLabel,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,buffer.contents,quit);
 
         return scene;
     }
@@ -185,13 +187,16 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         GridPane base = new GridPane();
 
+        quit2 = new Button("Quit");
+        quit2.setOnAction(this);
+
         Text badJob = new Text("time is up!");
 
         badJob.setStroke(Color.RED);
         badJob.setStyle("-fx-font: 50 arial");
 
         scene.setAlignment(Pos.CENTER);
-        scene.getChildren().addAll(badJob, quit);
+        scene.getChildren().addAll(badJob, quit2);
 
 
         return scene;
@@ -230,7 +235,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             if (goal_reachable) // test if game over is inevitable
                 if (buffer.unreachable(ourPuzzle.pickedSequence)) {
                     goal_reachable = false;
-                    root.getChildren().add(new Text("You bad!"));
+                    Text kek = new Text("You bad!");
+                    kek.setFill(Color.INDIANRED);
+                    ingame.getChildren().add(kek);
+                    //root.setAlignment(Pos.BOTTOM_RIGHT);
                 }
             seqState = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
                     buffer);          
@@ -256,14 +264,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
             //visuals
             //this is a value removal, that works (was before I decided to make hover highlighter)
-            updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
-            System.out.println("Updated: " + updateSequence);
+            //updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
+            //System.out.println("Updated: " + updateSequence);
 
             //////TESTING HIGHLIGHT
 //            String something = currSeq.colourfulSequence(updateSequence, "E9");
 //            sequence.setText(something);
             //sequenceFlow = new TextFlow(currSeq.colourfulSequence(updateSequence, "E9"));
-            currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
+            //currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
 
 //            System.out.println(nom);
 //            sequence.setText(nom.getText());
@@ -276,6 +284,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         }
 
         if (actionEvent.getSource() == quit){
+            System.exit(0);
+        }
+
+        if (actionEvent.getSource() == quit2){
             System.exit(0);
         }
 
