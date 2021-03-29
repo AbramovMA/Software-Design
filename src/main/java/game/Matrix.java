@@ -119,25 +119,4 @@ final public class Matrix{
             return Optional.empty();
     }
 
-    private Optional<Point> get_highlighted_position(MouseEvent mouseEvent) {
-        for (int column = 0; column < size; column++)
-            for (int row = 0; row < size; row++)
-                if (mouseEvent.getSource() == button_grid[column][row])
-                    return Optional.of(new Point(column, row));
-
-        return Optional.empty();
-    }
-
-    public String get_highlighted_value(MouseEvent mouseEvent) {
-        Optional<Point> selected_position = get_highlighted_position(mouseEvent);
-        if (selected_position.isPresent()) {
-            Point position = selected_position.get();
-            int selected_column = position.x;
-            int selected_row = position.y;
-
-            update_availability(selected_column, selected_row);
-            return button_grid[selected_column][selected_row].getText();
-        } else
-            return "";
-    }
 }
