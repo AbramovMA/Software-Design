@@ -41,7 +41,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     TextFlow sequenceFlow;
 
     Label scoreLabel;
-
+//
 
     Text sequence;
     Text input;
