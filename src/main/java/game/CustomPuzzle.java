@@ -9,8 +9,6 @@ public class CustomPuzzle {
     String[] goalSequence;
     public void loadPuzzle(File file) {
 
-        //File file = new File("src/code.txt");
-
         try {
             Scanner sizeScanner = new Scanner(file);
             String[] sizeTemp = sizeScanner.nextLine().split(" ");

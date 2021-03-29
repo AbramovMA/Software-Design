@@ -49,7 +49,7 @@ final public class Matrix{
                 int finalColumn = column;
                 int finalRow = row;
                 button_grid[column][row].setOnMouseEntered(e -> {seq.colourfulSequence  (button_grid[finalColumn][finalRow].getText());});
-                button_grid[column][row].setOnMouseExited (e -> {seq.uncolourfulSequence(button_grid[finalColumn][finalRow].getText());});
+                button_grid[column][row].setOnMouseExited (e -> {seq.uncolourfulSequence();});
                 button_grid[column][row].setDisable(row > 0);
                 was_selected[column][row] = false;
             }

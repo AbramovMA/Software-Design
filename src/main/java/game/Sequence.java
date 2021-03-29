@@ -25,9 +25,6 @@ public class Sequence extends Main {
         SequencePassState state;
         String[] currentSequence;
         currentSequence = sequence;
-        System.out.println("Hp " + input);
-        String suka = String.join(" ", currentSequence);
-        System.out.println(suka);
         if(i == (sequence.length - 1)){
             if(input.equals(currentSequence[i])){//Winner
                 state = SequencePassState.winner;
@@ -43,23 +40,17 @@ public class Sequence extends Main {
                     state = SequencePassState.nothing; // nothing
                 }
             }
-            System.out.println("So?");
         }
         else{
-            System.out.println("."+input + ". and ." + currentSequence[i] + ".");
-
             if(buffer.is_full()){//Game Over
                 state = SequencePassState.loser;
 
             }
             else if(input.equals( currentSequence[i])){
-                System.out.println("Oh Boi");
                 state = SequencePassState.pass; // pass
 
             }
             else{
-                System.out.println("Dumbass");
-
                 state = SequencePassState.nothing; //nothing really. Player has to chose another one
             }
         }
@@ -136,7 +127,7 @@ public class Sequence extends Main {
         }
 
     }
-    public void uncolourfulSequence(String value){
+    public void uncolourfulSequence(){
         Text partOfTheSeq;
         Text emptySpace;
         colourSequence.getChildren().clear();
@@ -149,12 +140,6 @@ public class Sequence extends Main {
         }
 
     }
-//    @Override
-//    public void handle(ActionEvent actionEvent){
-//        if(ActionEvent.getSource() == quit){
-//            System.exit(0);
-//        }
-//    }
 
 }
 

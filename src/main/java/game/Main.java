@@ -35,9 +35,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     private static final int matrix_size = 6;
     private Stage stage;
 
-    //HoverEffect hover;
     TimerClass time;
-    Sequence currSeq;
+    Sequence sequenceData;
     Label timerLabel;
     TextFlow sequenceFlow;
 
@@ -50,10 +49,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     Matrix matrix;
 
-//    Text goodJob;
-
-    Text badJob;
-
     FileChooser fileChooser;
     CustomPuzzle custom;
     Puzzles ourPuzzle;
@@ -64,12 +59,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button quit2;
     Button openButton;
 
-    int iSeq = 0;
+    int amountOfCorrectValues = 0;
 
     Sequence.SequencePassState seqState = Sequence.SequencePassState.nothing;
-
-    //VBox root;
-
 
     VBox ingame;
     VBox timeUp;
@@ -79,19 +71,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Timeline initTimeLine;
 
 
-
     boolean goal_reachable = true;
     String[] updateSequence;
-
-    public void getGameOver() {
-        Stage endingStage = new Stage();
-        badJob = new Text("Game Over!");
-
-
-        VBox endingBox = new VBox();
-        endingBox.setAlignment(Pos.CENTER);
-        endingBox.getChildren().addAll(scoreLabel, badJob, quit2);
-    }
 
 
     @Override
@@ -116,7 +97,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         GridPane base = new GridPane();
 
-        currSeq = new Sequence();
+        sequenceData = new Sequence();
 
         time = new TimerClass();
 
@@ -137,7 +118,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         quit = new Button("Quit");
         quit.setOnAction(this);
 
-        //TextFlow initialisation
         sequence = new Text("Press start to show sequence");
         sequenceFlow = new TextFlow(sequence);
 
@@ -146,23 +126,22 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         ourPuzzle = new Puzzles();
         ourPuzzle.puzzleGenerator();
-        currSeq.sequenceNew = ourPuzzle.pickedSequence;
-        currSeq.colourSequence = sequenceFlow;
+        sequenceData.sequenceNew = ourPuzzle.pickedSequence;
+        sequenceData.colourSequence = sequenceFlow;
 
         buffer = new Buffer(ourPuzzle.buffSize);
 
         buffInfo = new Text("Buffer size is " + ourPuzzle.buffSize +"!");
         input = new Text("");
 
-        matrix = new Matrix(matrix_size, base, this, currSeq);
+        matrix = new Matrix(matrix_size, base, this, sequenceData);
         matrix.set_values(ourPuzzle.pickedMatrix);
 
         SubScene matrixScene = new SubScene(base, 250, 200);
-        ////////////////////matrixScene.setVisible(false);
-        //SubScene othersScene = new SubScene(quit, 50, 25);
+        matrixScene.setVisible(false);
+
 
         scene.setAlignment(Pos.CENTER);
-        //It didn't want to be centered
         sequenceFlow.setTextAlignment(TextAlignment.CENTER);
         scene.getChildren().addAll(openButton,start,timerLabel,buffInfo,sequenceFlow,input,matrixScene,buffer.contents,quit);
 
@@ -210,7 +189,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        //String[] updatedSequence = ourPuzzle.pickedSequence; //this is for visuals
 
         String stringedSeq = String.join(" ", ourPuzzle.pickedSequence);
 
@@ -226,69 +204,28 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                     Text kek = new Text("You bad!");
                     kek.setFill(Color.INDIANRED);
                     ingame.getChildren().add(kek);
-                    //root.setAlignment(Pos.BOTTOM_RIGHT);
                 }
 
-            seqState = currSeq.sequenceProgression(iSeq, ourPuzzle.pickedSequence, value,
+            seqState = sequenceData.sequenceProgression(amountOfCorrectValues, ourPuzzle.pickedSequence, value,
                     buffer);
-//                String suka = String.join(" ", ourPuzzle.pickedSequence);
-//            System.out.println(suka);
-//                System.out.println(ourPuzzle.pickedSequence[0]+ourPuzzle.pickedSequence[1]);
-            if(seqState == Sequence.SequencePassState.pass){
-                System.out.println("Hello 1");
-            }
-            if(seqState == Sequence.SequencePassState.winner){
-                System.out.println("Hello 2");
-
-            }
-            if(seqState == Sequence.SequencePassState.loser){
-                System.out.println("Hello 3");
-
-            }
-            if(seqState == Sequence.SequencePassState.nothing){
-                System.out.println("Hello 0");
-
-            }
-
         }
 
 
         switch (seqState){
             case winner:
-                currSeq.getWinner(quit,handleScore());
+                sequenceData.getWinner(quit,handleScore());
                 break;
 
             case loser:
-                currSeq.getGameOver(quit);
+                sequenceData.getGameOver(quit);
                 break;
 
             case pass:
-                iSeq++;
+                amountOfCorrectValues++;
                 //visuals
-                updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
-                currSeq.sequenceNew = updateSequence;
+                updateSequence = sequenceData.arrayRemove(ourPuzzle.pickedSequence, amountOfCorrectValues);
+                sequenceData.sequenceNew = updateSequence;
                 break;
-
-
-            //visuals
-            //this is a value removal, that works (was before I decided to make hover highlighter)
-            //updateSequence = currSeq.arrayRemove(ourPuzzle.pickedSequence, iSeq);
-            //System.out.println("Updated: " + updateSequence);
-
-            //////TESTING HIGHLIGHT
-//            String something = currSeq.colourfulSequence(updateSequence, "E9");
-//            sequence.setText(something);
-            //sequenceFlow = new TextFlow(currSeq.colourfulSequence(updateSequence, "E9"));
-            //currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
-
-//            System.out.println(nom);
-//            sequence.setText(nom.getText());
-            //////End of TEST is here
-
-            //updateSequence[1].setColor(Color.YELLOWGREEN);
-
-//            stringedSeq = String.join(" ", updateSequence);
-//            sequence.setText(stringedSeq);
         }
 
         if (actionEvent.getSource() == quit){
@@ -304,7 +241,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             scenes[0].getChildren().get(7).setVisible(true);
             sequence.setText(stringedSeq);
             Stage startStage = new Stage();
-
+            ingame.getChildren().get(6).setVisible(true);
             time.handleTime();
 
             start.setVisible(false);
@@ -326,44 +263,18 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             startStage.show();
         }
 
-
-//        if(mouseEvent == hover){
-//
-//        }
-        /*
-        if(actionEvent.getSource() == hover){
-            if(iSeq > 0){
-                //String hoho = matrix.get_selected_value();
-                // get value from the matrix thing
-                //hover highlight is Text  with hoho,
-                //hover highlight function with updateSequence
-                //This String/Text = currSeq.colourfulSequence(updateSequence, hoho);
-                // sequence.setText(highlightedSequence);
-                currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
-
-
-            }
-            else{
-                //String hoho = matrix.get_selected_value();
-                //hover highlight function with ourPuzzle.pickedSequence
-                 currSeq.colourfulSequence(updateSequence, "E9", sequenceFlow);
-            }
-        }
-
-         */
         if (actionEvent.getSource() == openButton){
             configureFileChooser(fileChooser);
             File file = fileChooser.showOpenDialog(stage);
             if (file != null) {
                 custom.loadPuzzle(file);
                 matrix.set_values(custom.customMatrix);
-                currSeq.sequenceNew = custom.goalSequence;
+                sequenceData.sequenceNew = custom.goalSequence;
                 ourPuzzle.pickedSequence = Arrays.copyOf(custom.goalSequence, custom.goalSequence.length);
-                buffer = new Buffer(currSeq.sequenceNew.length + 3);
-                buffInfo.setText("Buffer size is " + (currSeq.sequenceNew.length + 3) +"!");
+                buffer = new Buffer(sequenceData.sequenceNew.length + 3);
+                buffInfo.setText("Buffer size is " + (sequenceData.sequenceNew.length + 3) +"!");
                 ingame.getChildren().remove(7);
                 ingame.getChildren().add(7, buffer.contents);
-
             }
         }
     }
@@ -375,52 +286,52 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         int seconds = Integer.parseInt(timerLabel.getText());
 
         if(seconds > 90) {
-            System.out.println("between 90-100  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 90-100  |  finish time: " + timerLabel.getText());
             score = 100;
         }
 
         if(seconds > 80 && seconds < 90) {
-            System.out.println("between 80-90  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 80-90  |  finish time: " + timerLabel.getText());
             score = 90;
         }
 
         if(seconds > 70 && seconds < 80) {
-            System.out.println("between 70-80  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 70-80  |  finish time: " + timerLabel.getText());
             score = 80;
         }
 
         if(seconds > 60 && seconds < 70) {
-            System.out.println("between 60-70  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 60-70  |  finish time: " + timerLabel.getText());
             score = 70;
         }
 
         if(seconds > 50 && seconds < 60) {
-            System.out.println("between 50-60  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 50-60  |  finish time: " + timerLabel.getText());
             score = 60;
         }
 
         if(seconds > 40 && seconds < 50) {
-            System.out.println("between 40-50  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 40-50  |  finish time: " + timerLabel.getText());
             score = 50;
         }
 
         if(seconds > 30 && seconds < 40) {
-            System.out.println("between 30-40  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 30-40  |  finish time: " + timerLabel.getText());
             score = 40;
         }
 
         if(seconds > 20 && seconds < 30) {
-            System.out.println("between 20-30  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 20-30  |  finish time: " + timerLabel.getText());
             score = 30;
         }
 
         if(seconds > 10 && seconds < 20) {
-            System.out.println("between 10-20  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 10-20  |  finish time: " + timerLabel.getText());
             score = 20;
         }
 
         if(seconds > 0 && seconds < 10) {
-            System.out.println("between 0-10  |  finish time: " + timerLabel.getText());
+            //System.out.println("between 0-10  |  finish time: " + timerLabel.getText());
             score = 10;
         }
 

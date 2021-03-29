@@ -1,6 +1,11 @@
 package game;
 
 public class Score extends Main{
+    //
+
+
+
+    //NOT NEEDED
     int score = 0;
 
     int getScore(){
