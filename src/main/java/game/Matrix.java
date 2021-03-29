@@ -71,7 +71,7 @@ final public class Matrix{
 
     private void update_availability(int selected_column, int selected_row){
         was_selected[selected_column][selected_row] = true;
-        button_grid[selected_column][selected_row].setStyle("-fx-background-color: #00ffff");
+        button_grid[selected_column][selected_row].setStyle("-fx-background-color: #000000");
         orientation = orientation.opposite();
 
         for (int column = 0; column < size; column++)
